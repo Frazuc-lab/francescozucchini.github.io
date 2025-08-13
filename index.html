@@ -1,131 +1,291 @@
-mport { Mail, ExternalLink, FileText, Linkedin, Github } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Francesco Zucchini - Academic Profile</title>
+    <meta name="description" content="Philosophy PhD Student and Researcher - Francesco Zucchini Academic Profile" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{
+margin: 0;
+padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: hsl(40, 20%, 98%);
+            color: hsl(25, 20%, 15%);
+            line-height: 1.6;
+}
+        .font-serif {
+            font-family: 'Crimson Text', serif;
+}
+        .container {
+            min-height: 100vh;
+            display: flex;
+}
+        .image-section {
+            display: none;
+            position: relative;
+        }
+        .content-section {
+            flex: 1;
+            background-color: hsl(42, 25%, 96%);
+        }
 
-export const AcademicProfile = () => {
-  return (
-    <div className="grid lg:grid-cols-2 gap-0 min-h-screen">
-      {/* Left side - Background image */}
-      <div className="hidden lg:block relative">
-        <div className="absolute inset-0 bg-gradient-to-br from-academic-gold/20 to-transparent"></div>
-      </div>
-      
-      {/* Right side - Content */}
-      <div className="bg-card/95 backdrop-blur-sm p-8 lg:p-16 flex flex-col justify-center">
-        <div className="max-w-2xl">
-          {/* Header */}
-          <header className="mb-12">
-            <h1 className="text-5xl lg:text-6xl font-semibold text-primary mb-4 tracking-tight">
-              FRANCESCO ZUCCHINI
-            </h1>
-            <div className="w-24 h-px bg-border mb-8"></div>
-            
-            {/* Quick links */}
-            <div className="flex flex-wrap gap-4 mb-8">
-              <Button variant="ghost" size="sm" asChild className="academic-link p-0 h-auto font-normal">
-                <a href="#cv" className="text-muted-foreground hover:text-primary">
-                  <FileText className="w-4 h-4 mr-2" />
-                  CV
-                </a>
-              </Button>
-              <Button variant="ghost" size="sm" asChild className="academic-link p-0 h-auto font-normal">
-                <a href="mailto:francesco.zucchini@uniroma1.it" className="text-muted-foreground hover:text-primary">
-                  <Mail className="w-4 h-4 mr-2" />
-                  Contact
-                </a>
-              </Button>
+.content-wrapper {
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: 4rem 1.5rem;
+}
+/* Header styles */
+.header {
+    margin-bottom: 3rem;
+}
+.header h1 {
+    font-family: 'Crimson Text', serif;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: hsl(25, 20%, 15%);
+    letter-spacing: -0.025em;
+    margin-bottom: 0.5rem;
+}
+.header .subtitle {
+    font-size: 1.125rem;
+    color: hsl(25, 15%, 45%);
+    font-weight: 300;
+}
+.header .divider {
+    margin-top: 1.5rem;
+    height: 1px;
+    background-color: hsl(35, 15%, 85%);
+}
+/* Section styles */
+.section {
+    margin-bottom: 4rem;
+}
+.section h2 {
+    font-family: 'Crimson Text', serif;
+    font-size: 1.875rem;
+    font-weight: 600;
+    color: hsl(25, 20%, 15%);
+    margin-bottom: 1.5rem;
+}
+.section-content {
+    color: hsl(25, 20%, 15%);
+    line-height: 1.7;
+}
+/* Contact links styles */
+.contact-links {
+    margin-bottom: 1.5rem;
+}
+.contact-link {
+    display: block;
+    margin-bottom: 0.75rem;
+}
+.academic-link {
+    color: hsl(25, 30%, 35%);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+.academic-link:hover {
+    color: hsl(20, 35%, 25%);
+    text-decoration-thickness: 2px;
+}
+.contact-info {
+    margin-top: 1.5rem;
+}
+.contact-info .label {
+    color: hsl(25, 15%, 45%);
+    font-style: italic;
+    margin-bottom: 0.5rem;
+}
+.contact-info .email {
+    font-family: monospace;
+    font-size: 0.875rem;
+}
+
+/* Text styles */
+.text-muted {
+    color: hsl(25, 15%, 45%);
+}
+.italic {
+    font-style: italic;
+}
+.font-medium {
+    font-weight: 500;
+}
+.text-sm {
+    font-size: 0.875rem;
+}
+.leading-relaxed {
+    line-height: 1.7;
+}
+.mb-3 {
+    margin-bottom: 0.75rem;
+}
+.mb-4 {
+    margin-bottom: 1rem;
+}
+.mb-6 {
+    margin-bottom: 1.5rem;
+}
+.mt-4 {
+    margin-top: 1rem;
+}
+.mt-6 {
+    margin-top: 1.5rem;
+}
+.space-y-3 > * + * {
+    margin-top: 0.75rem;
+}
+.space-y-4 > * + * {
+    margin-top: 1rem;
+}
+/* Responsive design */
+@media (min-width: 1024px) {
+    .image-section {
+        display: block;
+        width: 40%;
+        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><rect fill="%23f4f1eb" width="1000" height="1000"/><path fill="%23
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+}
+    .content-section {
+        width: 60%;
+}
+    .content-wrapper {
+        padding: 5rem 3rem;
+}
+    .header h1 {
+        font-size: 3.75rem;
+}
+    .header {
+        margin-bottom: 4rem;
+}
+    .section {
+        margin-bottom: 5rem;
+}
+    .section h2 {
+        font-size: 2.25rem;
+}
+          }
+@media (min-width: 1280px) {
+            .image-section {
+width: 50%; }
+            .content-section {
+                width: 50%;
+}
+            .content-wrapper {
+                padding: 5rem 4rem;
+} }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Left side - Image (hidden on mobile) -->
+        <div class="image-section"></div>
+        <!-- Right side - Content -->
+        <div class="content-section">
+            <div class="content-wrapper">
+                <!-- Header -->
+                <header class="header">
+                    <h1 class="font-serif">FRANCESCO ZUCCHINI</h1>
+                    <p class="subtitle">Philosophy PhD Student</p>
+                    <div class="divider"></div>
+</header>
+                <!-- About Section -->
+                <section class="section">
+                    <h2 class="font-serif">About</h2>
+                    <div class="section-content">
+                        <div class="contact-links">
+                            <div class="contact-link">
+                                <a href="#" class="academic-link font-medium">Research Talk</a>
+                            </div>
+                            <div class="contact-link">
+                                <a href="#" class="academic-link font-medium">Google Scholar</a>
+</div> <div>
+                                <span class="text-muted">link to </span>
+                                            <a href="#" class="academic-link font-medium">CV</a>
             </div>
-            
-            <p className="text-lg text-muted-foreground italic mb-4">
-              francesco.zucchini[at]uniroma1[dot]it
+</div>
+        <div class="contact-info">
+            <p class="label">contact:</p>
+            <p class="email">francesco.zucchini[at]university[dot]edu</p>
+</div>
+        <p class="mt-6 leading-relaxed">
+            I'm a Philosophy Ph.D. student at [University Name]. My research focuses on [your specific philosophical areas]. Before my doctoral studies, I completed my stud
+</p>
+        <p class="leading-relaxed">
+            Other than philosophy, I like [your interests/hobbies]. You can also find me on [social/professional platforms].
+</p> </div>
+</section>
+<!-- Research Section -->
+<section class="section">
+    <h2 class="font-serif">Research</h2>
+    <div class="section-content">
+        <div class="mb-6">
+            <h3 class="font-serif text-lg font-medium mb-3">Areas of interest:</h3>
+            <p class="text-muted italic">
+                ethics, aesthetics, political philosophy,
             </p>
-          </header>
-
-          {/* About Section */}
-          <section className="mb-12">
-            <h2 className="text-3xl font-semibold text-primary mb-6">About</h2>
-            <Card className="p-6 bg-academic-light border-academic-warm">
-              <p className="text-lg leading-relaxed text-academic-text mb-6">
-                I'm a PhD Student at Sapienza University of Rome, working on the philosophy of Cora Diamond.
-              </p>
-              <p className="text-lg leading-relaxed text-academic-text">
-                Beyond academia, 
-              </p>
-            </Card>
-          </section>
-
-          {/* Research Section */}
-          <section className="mb-12">
-            <h2 className="text-3xl font-semibold text-primary mb-6">Research</h2>
-            <div className="space-y-4">
-              <div>
-                <h3 className="text-xl font-medium text-primary mb-3">Areas of Interest:</h3>
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {[
-                    "Research Methodology", 
-                    "Data Analysis", 
-                    "Academic Writing", 
-                    "Interdisciplinary Studies"
-                  ].map((area, index) => (
-                    <span 
-                      key={index}
-                      className="px-3 py-1 bg-academic-gold/20 text-academic-text rounded-full text-sm font-medium"
-                    >
-                      {area}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <p className="text-lg leading-relaxed text-academic-text">
-                My research explores fundamental questions in my field, contributing to the academic discourse through rigorous investigation and scholarly analysis.
-              </p>
+            <p class="text-muted italic">
+                philosophy of mind, ancient philosophy
+</p> </div>
+        <p class="leading-relaxed mb-4">
+            [Describe here your main research focus and doctoral objectives. Explain the philosophical problem you're investigating and why it matters.]
+</p>
+        <p class="leading-relaxed">
+            <span class="font-medium italic">[Your thesis/main project title]</span>
+            examines [project description]. Through [methodology/approach], I argue that [your main thesis/contribution].
+</p> </div>
+</section>
+<!-- Publications & Presentations Section -->
+                <section class="section">
+                    <h2 class="font-serif">Publications & Presentations</h2>
+                    <div class="section-content">
+                        <div class="space-y-4">
+                            <div>
+                                <p>
+                                    <span class="italic">[Paper/Presentation Title]</span>
+                                    <span class="text-muted"> - [Venue/Conference], [Year]</span>
+</p> </div>
+<div> <p>
+                                    <span class="text-muted"> - [Venue/Conference], [Year]</span>
+                                </p>
+</div> <div>
+                                <p class="text-muted text-sm italic mt-4">
+                                    [Add here your publications, presentations, conferences]
+</p> </div>
+                        </div>
+                    </div>
+</section>
+                <!-- Teaching & Service Section -->
+                <section class="section">
+                    <h2 class="font-serif">Teaching & Service</h2>
+                    <div class="section-content">
+                        <div class="space-y-3">
+                            <div>
+                                <p class="font-medium">[Course/Teaching Activity]</p>
+                                <p class="text-muted text-sm">[University], [Semester/Year]</p>
+                            </div>
+                            <div>
+                                <p class="font-medium">[Service/Reviewing Activity]</p>
+                                <p class="text-muted text-sm">[Details]</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
-          </section>
-
-          {/* Publications/Work Section */}
-          <section className="mb-12">
-            <h2 className="text-3xl font-semibold text-primary mb-6">Publications & Work</h2>
-            <div className="space-y-4">
-              <p className="text-lg text-muted-foreground italic">
-                Publications and research outputs will be updated as they become available.
-              </p>
-              <Button variant="outline" asChild className="academic-link">
-                <a href="#" className="inline-flex items-center">
-                  View Research Profile
-                  <ExternalLink className="w-4 h-4 ml-2" />
-                </a>
-              </Button>
-            </div>
-          </section>
-
-          {/* Footer */}
-          <footer className="pt-8 border-t border-border">
-            <div className="flex flex-wrap gap-6">
-              <Button variant="ghost" size="sm" asChild className="academic-link">
-                <a href="mailto:francesco.zucchini@uniroma1.it">
-                  <Mail className="w-4 h-4 mr-2" />
-                  Email
-                </a>
-              </Button>
-              <Button variant="ghost" size="sm" asChild className="academic-link">
-                <a href="#">
-                  <Linkedin className="w-4 h-4 mr-2" />
-                  LinkedIn
-                </a>
-              </Button>
-              <Button variant="ghost" size="sm" asChild className="academic-link">
-                <a href="#">
-                  <Github className="w-4 h-4 mr-2" />
-                  GitHub
-                </a>
-              </Button>
-            </div>
-            <p className="text-sm text-muted-foreground mt-6">
-              © 2024 Francesco Zucchini. PhD Student at Sapienza University of Rome.
-            </p>
-          </footer>
         </div>
-      </div>
     </div>
-  );
-};
+</body>
+<span class="italic">[Paper/Presentation Title]</span>
+</html>
+  
