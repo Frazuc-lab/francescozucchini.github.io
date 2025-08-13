@@ -1,0 +1,131 @@
+mport { Mail, ExternalLink, FileText, Linkedin, Github } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+
+export const AcademicProfile = () => {
+  return (
+    <div className="grid lg:grid-cols-2 gap-0 min-h-screen">
+      {/* Left side - Background image */}
+      <div className="hidden lg:block relative">
+        <div className="absolute inset-0 bg-gradient-to-br from-academic-gold/20 to-transparent"></div>
+      </div>
+      
+      {/* Right side - Content */}
+      <div className="bg-card/95 backdrop-blur-sm p-8 lg:p-16 flex flex-col justify-center">
+        <div className="max-w-2xl">
+          {/* Header */}
+          <header className="mb-12">
+            <h1 className="text-5xl lg:text-6xl font-semibold text-primary mb-4 tracking-tight">
+              FRANCESCO ZUCCHINI
+            </h1>
+            <div className="w-24 h-px bg-border mb-8"></div>
+            
+            {/* Quick links */}
+            <div className="flex flex-wrap gap-4 mb-8">
+              <Button variant="ghost" size="sm" asChild className="academic-link p-0 h-auto font-normal">
+                <a href="#cv" className="text-muted-foreground hover:text-primary">
+                  <FileText className="w-4 h-4 mr-2" />
+                  CV
+                </a>
+              </Button>
+              <Button variant="ghost" size="sm" asChild className="academic-link p-0 h-auto font-normal">
+                <a href="mailto:francesco.zucchini@uniroma1.it" className="text-muted-foreground hover:text-primary">
+                  <Mail className="w-4 h-4 mr-2" />
+                  Contact
+                </a>
+              </Button>
+            </div>
+            
+            <p className="text-lg text-muted-foreground italic mb-4">
+              francesco.zucchini[at]uniroma1[dot]it
+            </p>
+          </header>
+
+          {/* About Section */}
+          <section className="mb-12">
+            <h2 className="text-3xl font-semibold text-primary mb-6">About</h2>
+            <Card className="p-6 bg-academic-light border-academic-warm">
+              <p className="text-lg leading-relaxed text-academic-text mb-6">
+                I'm a PhD Student at Sapienza University of Rome, working on the philosophy of Cora Diamond.
+              </p>
+              <p className="text-lg leading-relaxed text-academic-text">
+                Beyond academia, 
+              </p>
+            </Card>
+          </section>
+
+          {/* Research Section */}
+          <section className="mb-12">
+            <h2 className="text-3xl font-semibold text-primary mb-6">Research</h2>
+            <div className="space-y-4">
+              <div>
+                <h3 className="text-xl font-medium text-primary mb-3">Areas of Interest:</h3>
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {[
+                    "Research Methodology", 
+                    "Data Analysis", 
+                    "Academic Writing", 
+                    "Interdisciplinary Studies"
+                  ].map((area, index) => (
+                    <span 
+                      key={index}
+                      className="px-3 py-1 bg-academic-gold/20 text-academic-text rounded-full text-sm font-medium"
+                    >
+                      {area}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <p className="text-lg leading-relaxed text-academic-text">
+                My research explores fundamental questions in my field, contributing to the academic discourse through rigorous investigation and scholarly analysis.
+              </p>
+            </div>
+          </section>
+
+          {/* Publications/Work Section */}
+          <section className="mb-12">
+            <h2 className="text-3xl font-semibold text-primary mb-6">Publications & Work</h2>
+            <div className="space-y-4">
+              <p className="text-lg text-muted-foreground italic">
+                Publications and research outputs will be updated as they become available.
+              </p>
+              <Button variant="outline" asChild className="academic-link">
+                <a href="#" className="inline-flex items-center">
+                  View Research Profile
+                  <ExternalLink className="w-4 h-4 ml-2" />
+                </a>
+              </Button>
+            </div>
+          </section>
+
+          {/* Footer */}
+          <footer className="pt-8 border-t border-border">
+            <div className="flex flex-wrap gap-6">
+              <Button variant="ghost" size="sm" asChild className="academic-link">
+                <a href="mailto:francesco.zucchini@uniroma1.it">
+                  <Mail className="w-4 h-4 mr-2" />
+                  Email
+                </a>
+              </Button>
+              <Button variant="ghost" size="sm" asChild className="academic-link">
+                <a href="#">
+                  <Linkedin className="w-4 h-4 mr-2" />
+                  LinkedIn
+                </a>
+              </Button>
+              <Button variant="ghost" size="sm" asChild className="academic-link">
+                <a href="#">
+                  <Github className="w-4 h-4 mr-2" />
+                  GitHub
+                </a>
+              </Button>
+            </div>
+            <p className="text-sm text-muted-foreground mt-6">
+              © 2024 Francesco Zucchini. PhD Student at Sapienza University of Rome.
+            </p>
+          </footer>
+        </div>
+      </div>
+    </div>
+  );
+};
