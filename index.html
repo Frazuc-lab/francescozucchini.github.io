@@ -1,291 +1,636 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Francesco Zucchini - Academic Profile</title>
-    <meta name="description" content="Philosophy PhD Student and Researcher - Francesco Zucchini Academic Profile" />
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-*{
-margin: 0;
-padding: 0;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Francesco Zucchini - Philosophy PhD Student</title>
+    <meta name="description" content="Francesco Zucchini, Philosophy PhD Student at Sapienza University of Rome. Research in ethics, metaphysics, and moral philosophy.">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Academic neutral palette */
+            --background: hsl(35, 20%, 97%);
+            --foreground: hsl(30, 25%, 15%);
+            --card: hsl(40, 25%, 98%);
+            --card-foreground: hsl(30, 25%, 15%);
+            --primary: hsl(30, 25%, 15%);
+            --primary-foreground: hsl(35, 20%, 97%);
+            --secondary: hsl(120, 10%, 85%);
+            --secondary-foreground: hsl(30, 25%, 15%);
+            --muted: hsl(35, 15%, 92%);
+            --muted-foreground: hsl(30, 15%, 45%);
+            --accent: hsl(120, 15%, 88%);
+            --accent-foreground: hsl(30, 25%, 15%);
+            --border: hsl(35, 12%, 88%);
+            --input: hsl(35, 12%, 88%);
+            --shadow-elegant: 0 10px 40px -12px hsl(30, 25%, 15%, 0.18);
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
         }
+
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: hsl(40, 20%, 98%);
-            color: hsl(25, 20%, 15%);
-            line-height: 1.6;
-}
-        .font-serif {
-            font-family: 'Crimson Text', serif;
-}
+            font-family: var(--font-sans);
+            background-color: var(--background);
+            color: var(--foreground);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
         .container {
-            min-height: 100vh;
+            max-width: 80rem;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                padding: 0 2rem;
+            }
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 1024px) {
+            .grid {
+                grid-template-columns: repeat(12, 1fr);
+                gap: 4rem;
+            }
+        }
+
+        .col-span-5 {
+            grid-column: span 1;
+        }
+
+        .col-span-7 {
+            grid-column: span 1;
+        }
+
+        @media (min-width: 1024px) {
+            .col-span-5 {
+                grid-column: span 5;
+            }
+            .col-span-7 {
+                grid-column: span 7;
+            }
+        }
+
+        .hero-section {
+            padding: 4rem 0 6rem;
+        }
+
+        @media (min-width: 1024px) {
+            .hero-section {
+                padding: 6rem 0 8rem;
+            }
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            box-shadow: var(--shadow-elegant);
+            background: linear-gradient(135deg, #8B7355 0%, #A0916B 100%);
             display: flex;
-}
-        .image-section {
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+        }
+
+        @media (min-width: 1024px) {
+            .hero-image {
+                height: 500px;
+            }
+            .lg-pl-8 {
+                padding-left: 2rem;
+            }
+        }
+
+        .academic-title {
+            font-family: var(--font-serif);
+            font-size: 2.25rem;
+            font-weight: 500;
+            letter-spacing: -0.025em;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .academic-title {
+                font-size: 3rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .academic-title {
+                font-size: 3.75rem;
+            }
+        }
+
+        .academic-subtitle {
+            font-size: 1.125rem;
+            color: var(--muted-foreground);
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .academic-subtitle {
+                font-size: 1.25rem;
+            }
+        }
+
+        .email-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--muted-foreground);
+            margin-bottom: 2rem;
+        }
+
+        .email-text {
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+        }
+
+        .icon {
+            width: 1rem;
+            height: 1rem;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            border: 1px solid var(--border);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--foreground);
+            border: 1px solid var(--border);
+        }
+
+        .btn-outline:hover {
+            background: var(--accent);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: var(--secondary-foreground);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            opacity: 0.9;
+        }
+
+        .section {
+            padding: 4rem 0;
+        }
+
+        .section-bordered {
+            border-top: 1px solid var(--border);
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 500;
+            letter-spacing: -0.025em;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        @media (min-width: 768px) {
+            .section-title {
+                font-size: 1.875rem;
+            }
+        }
+
+        .section-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .academic-body {
+            line-height: 1.75;
+        }
+
+        .muted-text {
+            color: var(--muted-foreground);
+        }
+
+        .research-interests {
+            margin-top: 1.5rem;
+        }
+
+        .research-interests h3 {
+            font-size: 1.125rem;
+            font-weight: 500;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .interest-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .interest-bullet {
+            color: var(--muted-foreground);
+            margin-top: 0.5rem;
+        }
+
+        .quote-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .quote-text {
+            font-style: italic;
+            color: var(--muted-foreground);
+            line-height: 1.75;
+        }
+
+        .footer {
+            padding: 3rem 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .footer-text {
+            font-size: 0.875rem;
+            color: var(--muted-foreground);
+        }
+
+        /* Modal Styles */
+        .modal {
             display: none;
-            position: relative;
-        }
-        .content-section {
-            flex: 1;
-            background-color: hsl(42, 25%, 96%);
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
         }
 
-.content-wrapper {
-    max-width: 48rem;
-    margin: 0 auto;
-    padding: 4rem 1.5rem;
-}
-/* Header styles */
-.header {
-    margin-bottom: 3rem;
-}
-.header h1 {
-    font-family: 'Crimson Text', serif;
-    font-size: 2.5rem;
-    font-weight: 600;
-    color: hsl(25, 20%, 15%);
-    letter-spacing: -0.025em;
-    margin-bottom: 0.5rem;
-}
-.header .subtitle {
-    font-size: 1.125rem;
-    color: hsl(25, 15%, 45%);
-    font-weight: 300;
-}
-.header .divider {
-    margin-top: 1.5rem;
-    height: 1px;
-    background-color: hsl(35, 15%, 85%);
-}
-/* Section styles */
-.section {
-    margin-bottom: 4rem;
-}
-.section h2 {
-    font-family: 'Crimson Text', serif;
-    font-size: 1.875rem;
-    font-weight: 600;
-    color: hsl(25, 20%, 15%);
-    margin-bottom: 1.5rem;
-}
-.section-content {
-    color: hsl(25, 20%, 15%);
-    line-height: 1.7;
-}
-/* Contact links styles */
-.contact-links {
-    margin-bottom: 1.5rem;
-}
-.contact-link {
-    display: block;
-    margin-bottom: 0.75rem;
-}
-.academic-link {
-    color: hsl(25, 30%, 35%);
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 2px;
-    font-weight: 500;
-    transition: all 0.2s;
-}
-.academic-link:hover {
-    color: hsl(20, 35%, 25%);
-    text-decoration-thickness: 2px;
-}
-.contact-info {
-    margin-top: 1.5rem;
-}
-.contact-info .label {
-    color: hsl(25, 15%, 45%);
-    font-style: italic;
-    margin-bottom: 0.5rem;
-}
-.contact-info .email {
-    font-family: monospace;
-    font-size: 0.875rem;
-}
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-/* Text styles */
-.text-muted {
-    color: hsl(25, 15%, 45%);
-}
-.italic {
-    font-style: italic;
-}
-.font-medium {
-    font-weight: 500;
-}
-.text-sm {
-    font-size: 0.875rem;
-}
-.leading-relaxed {
-    line-height: 1.7;
-}
-.mb-3 {
-    margin-bottom: 0.75rem;
-}
-.mb-4 {
-    margin-bottom: 1rem;
-}
-.mb-6 {
-    margin-bottom: 1.5rem;
-}
-.mt-4 {
-    margin-top: 1rem;
-}
-.mt-6 {
-    margin-top: 1.5rem;
-}
-.space-y-3 > * + * {
-    margin-top: 0.75rem;
-}
-.space-y-4 > * + * {
-    margin-top: 1rem;
-}
-/* Responsive design */
-@media (min-width: 1024px) {
-    .image-section {
-        display: block;
-        width: 40%;
-        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><rect fill="%23f4f1eb" width="1000" height="1000"/><path fill="%23
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-}
-    .content-section {
-        width: 60%;
-}
-    .content-wrapper {
-        padding: 5rem 3rem;
-}
-    .header h1 {
-        font-size: 3.75rem;
-}
-    .header {
-        margin-bottom: 4rem;
-}
-    .section {
-        margin-bottom: 5rem;
-}
-    .section h2 {
-        font-size: 2.25rem;
-}
-          }
-@media (min-width: 1280px) {
-            .image-section {
-width: 50%; }
-            .content-section {
-                width: 50%;
-}
-            .content-wrapper {
-                padding: 5rem 4rem;
-} }
+        .modal-content {
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 2rem;
+            max-width: 40rem;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid var(--border);
+            border-radius: 0.375rem;
+            background: var(--background);
+            color: var(--foreground);
+        }
+
+        .form-textarea {
+            resize: vertical;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--primary-foreground);
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Left side - Image (hidden on mobile) -->
-        <div class="image-section"></div>
-        <!-- Right side - Content -->
-        <div class="content-section">
-            <div class="content-wrapper">
-                <!-- Header -->
-                <header class="header">
-                    <h1 class="font-serif">FRANCESCO ZUCCHINI</h1>
-                    <p class="subtitle">Philosophy PhD Student</p>
-                    <div class="divider"></div>
-</header>
-                <!-- About Section -->
-                <section class="section">
-                    <h2 class="font-serif">About</h2>
-                    <div class="section-content">
-                        <div class="contact-links">
-                            <div class="contact-link">
-                                <a href="#" class="academic-link font-medium">Research Talk</a>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container">
+                <div class="grid">
+                    <!-- Left side - Visual -->
+                    <div class="col-span-5">
+                        <div class="hero-image">
+                            Academic Environment
+                        </div>
+                    </div>
+
+                    <!-- Right side - Name and Title -->
+                    <div class="col-span-7 lg-pl-8">
+                        <div>
+                            <h1 class="academic-title" id="profileName">Francesco Zucchini</h1>
+                            <p class="academic-subtitle" id="profileTitle">Philosophy PhD Student at Sapienza University of Rome</p>
+                            
+                            <div class="email-container">
+                                <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                                <span class="email-text" id="profileEmail">francesco.zucchini[at]uniroma1[dot]it</span>
                             </div>
-                            <div class="contact-link">
-                                <a href="#" class="academic-link font-medium">Google Scholar</a>
-</div> <div>
-                                <span class="text-muted">link to </span>
-                                            <a href="#" class="academic-link font-medium">CV</a>
+
+                            <div class="button-container">
+                                <a href="#" class="btn btn-outline">
+                                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                    </svg>
+                                    CV
+                                </a>
+                                <button class="btn btn-secondary" onclick="openEditModal()">
+                                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                    </svg>
+                                    Edit Profile
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-</div>
-        <div class="contact-info">
-            <p class="label">contact:</p>
-            <p class="email">francesco.zucchini[at]university[dot]edu</p>
-</div>
-        <p class="mt-6 leading-relaxed">
-            I'm a Philosophy Ph.D. student at [University Name]. My research focuses on [your specific philosophical areas]. Before my doctoral studies, I completed my stud
-</p>
-        <p class="leading-relaxed">
-            Other than philosophy, I like [your interests/hobbies]. You can also find me on [social/professional platforms].
-</p> </div>
-</section>
-<!-- Research Section -->
-<section class="section">
-    <h2 class="font-serif">Research</h2>
-    <div class="section-content">
-        <div class="mb-6">
-            <h3 class="font-serif text-lg font-medium mb-3">Areas of interest:</h3>
-            <p class="text-muted italic">
-                ethics, aesthetics, political philosophy,
-            </p>
-            <p class="text-muted italic">
-                philosophy of mind, ancient philosophy
-</p> </div>
-        <p class="leading-relaxed mb-4">
-            [Describe here your main research focus and doctoral objectives. Explain the philosophical problem you're investigating and why it matters.]
-</p>
-        <p class="leading-relaxed">
-            <span class="font-medium italic">[Your thesis/main project title]</span>
-            examines [project description]. Through [methodology/approach], I argue that [your main thesis/contribution].
-</p> </div>
-</section>
-<!-- Publications & Presentations Section -->
-                <section class="section">
-                    <h2 class="font-serif">Publications & Presentations</h2>
-                    <div class="section-content">
-                        <div class="space-y-4">
-                            <div>
-                                <p>
-                                    <span class="italic">[Paper/Presentation Title]</span>
-                                    <span class="text-muted"> - [Venue/Conference], [Year]</span>
-</p> </div>
-<div> <p>
-                                    <span class="text-muted"> - [Venue/Conference], [Year]</span>
+        </section>
+
+        <!-- About Section -->
+        <section class="section">
+            <div class="container">
+                <div class="grid">
+                    <div class="col-span-5">
+                        <h2 class="section-title">About</h2>
+                    </div>
+                    <div class="col-span-7">
+                        <div class="section-content">
+                            <p class="academic-body" id="profileBio">
+                                I am a Philosophy PhD student at Sapienza University of Rome, exploring fundamental questions about ethics, metaphysics, and the nature of philosophical inquiry. My research focuses on contemporary debates in moral philosophy and their historical foundations.
+                            </p>
+                            <p class="academic-body muted-text" id="profileAbout">
+                                Beyond philosophy, I enjoy engaging with interdisciplinary approaches that bridge philosophical inquiry with other fields of study. I am particularly interested in how philosophical methods can illuminate contemporary challenges in ethics and social theory.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Research Section -->
+        <section class="section section-bordered">
+            <div class="container">
+                <div class="grid">
+                    <div class="col-span-5">
+                        <h2 class="section-title">Research</h2>
+                    </div>
+                    <div class="col-span-7">
+                        <div class="section-content">
+                            <div class="research-interests">
+                                <h3>Areas of Interest:</h3>
+                                <div id="researchInterests">
+                                    <div class="interest-item">
+                                        <span class="interest-bullet">•</span>
+                                        <span class="academic-body">Ethics and Moral Philosophy</span>
+                                    </div>
+                                    <div class="interest-item">
+                                        <span class="interest-bullet">•</span>
+                                        <span class="academic-body">Metaphysics</span>
+                                    </div>
+                                    <div class="interest-item">
+                                        <span class="interest-bullet">•</span>
+                                        <span class="academic-body">Philosophy of Mind</span>
+                                    </div>
+                                    <div class="interest-item">
+                                        <span class="interest-bullet">•</span>
+                                        <span class="academic-body">Ancient Philosophy</span>
+                                    </div>
+                                    <div class="interest-item">
+                                        <span class="interest-bullet">•</span>
+                                        <span class="academic-body">Continental Philosophy</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="quote-card">
+                                <p class="quote-text">
+                                    "Philosophy is not just an academic pursuit, but a way of engaging with the fundamental questions 
+                                    that shape human experience and understanding."
                                 </p>
-</div> <div>
-                                <p class="text-muted text-sm italic mt-4">
-                                    [Add here your publications, presentations, conferences]
-</p> </div>
-                        </div>
-                    </div>
-</section>
-                <!-- Teaching & Service Section -->
-                <section class="section">
-                    <h2 class="font-serif">Teaching & Service</h2>
-                    <div class="section-content">
-                        <div class="space-y-3">
-                            <div>
-                                <p class="font-medium">[Course/Teaching Activity]</p>
-                                <p class="text-muted text-sm">[University], [Semester/Year]</p>
-                            </div>
-                            <div>
-                                <p class="font-medium">[Service/Reviewing Activity]</p>
-                                <p class="text-muted text-sm">[Details]</p>
                             </div>
                         </div>
                     </div>
-                </section>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <p class="footer-text">
+                    © 2024 <span id="footerName">Francesco Zucchini</span>. Built with care for academic excellence.
+                </p>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                </svg>
+                Edit Profile
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Name</label>
+                <input type="text" id="editName" class="form-input" />
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Title</label>
+                <input type="text" id="editTitle" class="form-input" />
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Email</label>
+                <input type="email" id="editEmail" class="form-input" />
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Biography</label>
+                <textarea id="editBio" class="form-textarea" rows="4"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Additional About Text</label>
+                <textarea id="editAbout" class="form-textarea" rows="3"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Research Interests (one per line)</label>
+                <textarea id="editResearch" class="form-textarea" rows="5"></textarea>
+            </div>
+            
+            <div class="modal-buttons">
+                <button class="btn btn-outline" onclick="closeEditModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="saveProfile()">Save Changes</button>
             </div>
         </div>
     </div>
+
+    <script>
+        // Profile data storage
+        let profileData = {
+            name: "Francesco Zucchini",
+            title: "Philosophy PhD Student at Sapienza University of Rome",
+            email: "francesco.zucchini@uniroma1.it",
+            bio: "I am a Philosophy PhD student at Sapienza University of Rome, exploring fundamental questions about ethics, metaphysics, and the nature of philosophical inquiry. My research focuses on contemporary debates in moral philosophy and their historical foundations.",
+            aboutText: "Beyond philosophy, I enjoy engaging with interdisciplinary approaches that bridge philosophical inquiry with other fields of study. I am particularly interested in how philosophical methods can illuminate contemporary challenges in ethics and social theory.",
+            researchInterests: [
+                "Ethics and Moral Philosophy",
+                "Metaphysics", 
+                "Philosophy of Mind",
+                "Ancient Philosophy",
+                "Continental Philosophy"
+            ]
+        };
+
+        // Load data from localStorage if available
+        const savedData = localStorage.getItem('francescoProfile');
+        if (savedData) {
+            profileData = JSON.parse(savedData);
+            updateDisplay();
+        }
+
+        function openEditModal() {
+            document.getElementById('editName').value = profileData.name;
+            document.getElementById('editTitle').value = profileData.title;
+            document.getElementById('editEmail').value = profileData.email;
+            document.getElementById('editBio').value = profileData.bio;
+            document.getElementById('editAbout').value = profileData.aboutText;
+            document.getElementById('editResearch').value = profileData.researchInterests.join('\n');
+            
+            document.getElementById('editModal').classList.add('active');
+        }
+
+        function closeEditModal() {
+            document.getElementById('editModal').classList.remove('active');
+        }
+
+        function saveProfile() {
+            profileData = {
+                name: document.getElementById('editName').value,
+                title: document.getElementById('editTitle').value,
+                email: document.getElementById('editEmail').value,
+                bio: document.getElementById('editBio').value,
+                aboutText: document.getElementById('editAbout').value,
+                researchInterests: document.getElementById('editResearch').value
+                    .split('\n')
+                    .filter(interest => interest.trim() !== '')
+            };
+
+            // Save to localStorage
+            localStorage.setItem('francescoProfile', JSON.stringify(profileData));
+            
+            updateDisplay();
+            closeEditModal();
+        }
+
+        function updateDisplay() {
+            document.getElementById('profileName').textContent = profileData.name;
+            document.getElementById('profileTitle').textContent = profileData.title;
+            document.getElementById('profileEmail').textContent = 
+                profileData.email.replace('@', '[at]').replace('.', '[dot]');
+            document.getElementById('profileBio').textContent = profileData.bio;
+            document.getElementById('profileAbout').textContent = profileData.aboutText;
+            document.getElementById('footerName').textContent = profileData.name;
+            
+            // Update research interests
+            const researchContainer = document.getElementById('researchInterests');
+            researchContainer.innerHTML = profileData.researchInterests.map(interest => 
+                `<div class="interest-item">
+                    <span class="interest-bullet">•</span>
+                    <span class="academic-body">${interest}</span>
+                </div>`
+            ).join('');
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('editModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeEditModal();
+            }
+        });
+    </script>
 </body>
-<span class="italic">[Paper/Presentation Title]</span>
 </html>
-  
