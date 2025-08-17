@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -101,6 +102,13 @@
             object-fit: cover;
             border-radius: 0.5rem;
             box-shadow: var(--shadow-elegant);
+            background-image: url('public/academic-hero.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .hero-image.fallback {
             background: linear-gradient(135deg, #8B7355 0%, #A0916B 100%);
             display: flex;
             align-items: center;
@@ -375,9 +383,127 @@
         .btn-primary:hover {
             opacity: 0.9;
         }
+
+        /* Admin Panel Styles */
+        .admin-panel {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 400px;
+            height: 100vh;
+            background: var(--background);
+            border-left: 1px solid var(--border);
+            box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .admin-panel.active {
+            display: block;
+        }
+
+        .admin-header {
+            margin-bottom: 2rem;
+        }
+
+        .admin-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: var(--primary-foreground);
+            border: none;
+            padding: 0.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1001;
+            opacity: 0.1;
+        }
+
+        .admin-toggle:hover {
+            opacity: 1;
+        }
+
+        .image-upload-area {
+            border: 2px dashed var(--border);
+            border-radius: 0.5rem;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .image-upload-area:hover {
+            border-color: var(--primary);
+            background: var(--accent);
+        }
+
+        .image-upload-area.drag-over {
+            border-color: var(--primary);
+            background: var(--accent);
+        }
     </style>
 </head>
 <body>
+    <!-- Admin Toggle Button -->
+    <button class="admin-toggle" onclick="toggleAdminPanel()" title="Admin Panel">
+        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+        </svg>
+    </button>
+
+    <!-- Admin Panel -->
+    <div id="adminPanel" class="admin-panel">
+        <div class="admin-header">
+            <h3 style="margin: 0; color: var(--primary);">Admin Panel</h3>
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Hero Image</label>
+            <div class="image-upload-area" onclick="document.getElementById('heroImageInput').click()">
+                <p>Click or drag image here</p>
+                <input type="file" id="heroImageInput" accept="image/*" style="display: none;">
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Name</label>
+            <input type="text" id="adminName" class="form-input" />
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Title</label>
+            <input type="text" id="adminTitle" class="form-input" />
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" id="adminEmail" class="form-input" />
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Biography</label>
+            <textarea id="adminBio" class="form-textarea" rows="4"></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Additional About Text</label>
+            <textarea id="adminAbout" class="form-textarea" rows="3"></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Research Interests (one per line)</label>
+            <textarea id="adminResearch" class="form-textarea" rows="5"></textarea>
+        </div>
+        
+        <button class="btn btn-primary" onclick="saveAdminProfile()" style="width: 100%; margin-top: 1rem;">
+            Save Changes
+        </button>
+    </div>
     <main>
         <!-- Hero Section -->
         <section class="hero-section">
@@ -385,9 +511,7 @@
                 <div class="grid">
                     <!-- Left side - Visual -->
                     <div class="col-span-5">
-                        <div class="hero-image">
-                            Academic Environment
-                        </div>
+                        <div class="hero-image" id="heroImage"></div>
                     </div>
 
                     <!-- Right side - Name and Title -->
@@ -410,12 +534,6 @@
                                     </svg>
                                     CV
                                 </a>
-                                <button class="btn btn-secondary" onclick="openEditModal()">
-                                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-                                    </svg>
-                                    Edit Profile
-                                </button>
                             </div>
                         </div>
                     </div>
@@ -629,6 +747,96 @@
         document.getElementById('editModal').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeEditModal();
+            }
+        });
+
+        // Admin Panel Functions
+        function toggleAdminPanel() {
+            const panel = document.getElementById('adminPanel');
+            panel.classList.toggle('active');
+            if (panel.classList.contains('active')) {
+                loadAdminData();
+            }
+        }
+
+        function loadAdminData() {
+            document.getElementById('adminName').value = profileData.name;
+            document.getElementById('adminTitle').value = profileData.title;
+            document.getElementById('adminEmail').value = profileData.email;
+            document.getElementById('adminBio').value = profileData.bio;
+            document.getElementById('adminAbout').value = profileData.aboutText;
+            document.getElementById('adminResearch').value = profileData.researchInterests.join('\n');
+        }
+
+        function saveAdminProfile() {
+            profileData = {
+                name: document.getElementById('adminName').value,
+                title: document.getElementById('adminTitle').value,
+                email: document.getElementById('adminEmail').value,
+                bio: document.getElementById('adminBio').value,
+                aboutText: document.getElementById('adminAbout').value,
+                researchInterests: document.getElementById('adminResearch').value
+                    .split('\n')
+                    .filter(interest => interest.trim() !== '')
+            };
+
+            localStorage.setItem('francescoProfile', JSON.stringify(profileData));
+            updateDisplay();
+            document.getElementById('adminPanel').classList.remove('active');
+        }
+
+        // Image upload handling
+        document.getElementById('heroImageInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imageData = e.target.result;
+                    localStorage.setItem('heroImage', imageData);
+                    updateHeroImage(imageData);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function updateHeroImage(imageData) {
+            const heroImage = document.getElementById('heroImage');
+            heroImage.style.backgroundImage = `url(${imageData})`;
+            heroImage.classList.remove('fallback');
+        }
+
+        // Load saved hero image on page load
+        const savedHeroImage = localStorage.getItem('heroImage');
+        if (savedHeroImage) {
+            updateHeroImage(savedHeroImage);
+        }
+
+        // Drag and drop for image upload
+        const uploadArea = document.querySelector('.image-upload-area');
+        
+        uploadArea.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            uploadArea.classList.add('drag-over');
+        });
+
+        uploadArea.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            uploadArea.classList.remove('drag-over');
+        });
+
+        uploadArea.addEventListener('drop', function(e) {
+            e.preventDefault();
+            uploadArea.classList.remove('drag-over');
+            
+            const files = e.dataTransfer.files;
+            if (files.length > 0 && files[0].type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imageData = e.target.result;
+                    localStorage.setItem('heroImage', imageData);
+                    updateHeroImage(imageData);
+                };
+                reader.readAsDataURL(files[0]);
             }
         });
     </script>
