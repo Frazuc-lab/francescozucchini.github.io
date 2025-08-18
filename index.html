@@ -270,15 +270,17 @@
 
         .interest-item {
             display: flex;
-            align-items: center;   /* centra verticalmente testo e bullet */
+            align-items: center;
             gap: 0.5rem;
             margin-bottom: 0.5rem;
+            position: relative;
         }
 
-        .interest-bullet {
+        .interest-item::before {
+            content: "•";
             color: var(--muted-foreground);
-            font-size: 1.2rem;     /* opzionale: ingrandisci il pallino */
-            line-height: 1;        /* lo tiene centrato */
+            font-size: 1.2rem;
+            line-height: 1;
         }
 
         .quote-card {
@@ -527,23 +529,18 @@
                                 <h3>Areas of Interest:</h3>
                                 <div id="researchInterests">
                                     <div class="interest-item">
-                                        <span class="interest-bullet">•</span>
                                         <span class="academic-body">Ethics and Moral Philosophy</span>
                                     </div>
                                     <div class="interest-item">
-                                        <span class="interest-bullet">•</span>
                                         <span class="academic-body">Philosophy of Language</span>
                                     </div>
                                     <div class="interest-item">
-                                        <span class="interest-bullet">•</span>
                                         <span class="academic-body">Philosophy of Mind</span>
                                     </div>
                                     <div class="interest-item">
-                                        <span class="interest-bullet">•</span>
                                         <span class="academic-body">Wittgenstein</span>
                                     </div>
                                     <div class="interest-item">
-                                        <span class="interest-bullet">•</span>
                                         <span class="academic-body">Early Analytic Philosophy</span>
                                     </div>
                                 </div>
