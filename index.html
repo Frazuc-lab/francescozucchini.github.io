@@ -447,72 +447,7 @@
     </style>
 </head>
 <body>
-    <!-- Admin Toggle Button -->
-    <button class="admin-toggle" onclick="toggleAdminPanel()" title="Admin Panel">
-        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-        </svg>
-    </button>
 
-    <!-- Admin Panel -->
-    <div id="adminPanel" class="admin-panel">
-        <div class="admin-header">
-            <h3 style="margin: 0; color: var(--primary);">Admin Panel</h3>
-        </div>
-        
-        <div class="form-group">
-            <label class="form-label">Hero Image</label>
-            <div class="image-upload-area" onclick="document.getElementById('heroImageInput').click()">
-                <p>Click or drag image here</p>
-                <input type="file" id="heroImageInput" accept="image/*" style="display: none;">
-            </div>
-        </div>
-        
-        <div class="form-group">
-            <label class="form-label">Name</label>
-            <input type="text" id="adminName" class="form-input" />
-        </div>
-        
-        <div class="form-group">
-            <label class="form-label">Title</label>
-            <input type="text" id="adminTitle" class="form-input" />
-        </div>
-        
-        <div class="form-group">
-            <label class="form-label">Email</label>
-            <input type="email" id="adminEmail" class="form-input" />
-        </div>
-        
-        <div class="form-group">
-            <label class="form-label">Biography</label>
-            <textarea id="adminBio" class="form-textarea" rows="4"></textarea>
-        </div>
-        
-        <div class="form-group">
-            <label class="form-label">Additional About Text</label>
-            <textarea id="adminAbout" class="form-textarea" rows="3"></textarea>
-        </div>
-        
-        <div class="form-group">
-            <label class="form-label">Research Interests (one per line)</label>
-            <textarea id="adminResearch" class="form-textarea" rows="5"></textarea>
-        </div>
-        
-        <div class="form-group">
-            <label class="form-label">Substack URL</label>
-            <input type="url" id="adminSubstack" class="form-input" placeholder="https://yoursubstack.substack.com" />
-        </div>
-        
-        <div class="form-group">
-            <label class="form-label">CV Content</label>
-            <textarea id="adminCV" class="form-textarea" rows="10" placeholder="Enter your CV content here..."></textarea>
-        </div>
-        
-        <button class="btn btn-primary" onclick="saveAdminProfile()" style="width: 100%; margin-top: 1rem;">
-            Save Changes
-        </button>
-    </div>
     <main>
         <!-- Hero Section -->
         <section class="hero-section">
