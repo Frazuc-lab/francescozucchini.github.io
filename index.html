@@ -587,26 +587,6 @@
         </footer>
     </main>
 
-    <!-- CV Modal -->
-    <div id="cvModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                </svg>
-                Curriculum Vitae
-            </div>
-            
-            <div id="cvContent" class="academic-body" style="white-space: pre-line; line-height: 1.75;">
-                Please add your CV content through the admin panel (gear icon at the top right).
-            </div>
-            
-            <div class="modal-buttons">
-                <button class="btn btn-outline" onclick="closeCVModal()">Close</button>
-            </div>
-        </div>
-    </div>
-
     <!-- Edit Modal -->
     <div id="editModal" class="modal">
         <div class="modal-content">
@@ -765,22 +745,6 @@
                 loadAdminData();
             }
         }
-
-        // CV Modal Functions
-        function openCVModal() {
-            document.getElementById('cvModal').classList.add('active');
-        }
-
-        function closeCVModal() {
-            document.getElementById('cvModal').classList.remove('active');
-        }
-
-        // Close CV modal when clicking outside
-        document.getElementById('cvModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeCVModal();
-            }
-        });
 
         function loadAdminData() {
             document.getElementById('adminName').value = profileData.name;
