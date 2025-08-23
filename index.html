@@ -447,9 +447,32 @@
             border-color: var(--primary);
             background: var(--accent);
         }
+
+         .game-icon {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 9999;
+    }
+
+    .game-icon img {
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .game-icon img:hover {
+      transform: scale(1.2);
+    }
+        
     </style>
 </head>
 <body>
+     <!-- 🔽 Add the game icon link here -->
+  <a href="duck-rabbit-game/index.html" target="_blank" class="game-icon">
+    <img src="duck-rabbit-icon.png" alt="Play Duck-Rabbit Game">
+  </a>
 
     <main>
         <!-- Hero Section -->
