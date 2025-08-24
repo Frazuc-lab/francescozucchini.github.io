@@ -34,8 +34,7 @@ const duckRabbit = {
 };
 
 // Load duck-rabbit image safely
-const duckRabbitImg = new Image();
-duckRabbitImg.src = "duck-rabbit.png"; 
+const duckRabbitImg = new Image(); 
 let duckRabbitReady = false;
 
 duckRabbitImg.onload = () => {
@@ -82,18 +81,8 @@ function init() {
         }
     });
     
-    // Start game loop (but check if image is ready first)
-    if (duckRabbitReady) {
-        console.log('Image already loaded, starting game');
-        gameLoop();
-    } else {
-        console.log('Waiting for image to load...');
-        duckRabbitImg.onload = () => {
-            duckRabbitReady = true;
-            console.log('Image loaded, starting game');
-            gameLoop();
-        };
-    }
+    // Start game loop (canvas and ctx are definitely ready now)
+    gameLoop();
 }
 
 // Handle user input
@@ -277,6 +266,12 @@ function drawPipe(pipe) {
 
 // Render game
 function render() {
+    // Safety check
+    if (!ctx) {
+        console.error('Context not ready');
+        return;
+    }
+    
     // Clear canvas with paper-like background
     ctx.fillStyle = '#fafafa';
     ctx.fillRect(0, 0, CONFIG.canvas_width, CONFIG.canvas_height);
