@@ -5,9 +5,9 @@ const CONFIG = {
     gravity: 0.5,
     jump_force: -8,
     pipe_speed: 2,
-    pipe_gap: 120,
+    pipe_gap: 160,
     pipe_width: 60,
-    sprite_size: 35
+    sprite_size: 50
 };
 
 // Game state
