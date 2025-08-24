@@ -7,7 +7,7 @@ const CONFIG = {
     pipe_speed: 2,
     pipe_gap: 160,
     pipe_width: 60,
-    sprite_size: 50
+    sprite_size: 60
 };
 
 // Game state
