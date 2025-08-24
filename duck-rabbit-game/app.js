@@ -40,6 +40,7 @@ let duckRabbitReady = false;
 
 duckRabbitImg.onload = () => {
   duckRabbitReady = true;
+    gameLoop();  
 };
 
 // Draw duck-rabbit sprite using the PNG
@@ -78,9 +79,6 @@ function init() {
             handleInput();
         }
     });
-    
-    // Start game loop
-    gameLoop();
 }
 
 // Handle user input
@@ -205,6 +203,25 @@ function checkCollision(pipe) {
 // Game over
 function gameOver() {
     gameState = GAME_STATES.GAME_OVER;
+}
+
+// Add this function before drawPipe
+function drawHandDrawnLine(x1, y1, x2, y2, wobble = 0.8) {
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    const distance = Math.sqrt((x2-x1)**2 + (y2-y1)**2);
+    const steps = Math.max(Math.floor(distance / 8), 2);
+    for (let i = 1; i <= steps; i++) {
+        const progress = i / steps;
+        const x = x1 + (x2 - x1) * progress;
+        const y = y1 + (y2 - y1) * progress;
+        const wobbleX = (Math.random() - 0.5) * wobble;
+        const wobbleY = (Math.random() - 0.5) * wobble;
+        ctx.lineTo(x + wobbleX, y + wobbleY);
+    }
+    ctx.strokeStyle = '#000000';
+    ctx.lineWidth = 2;
+    ctx.stroke();
 }
 
 // Draw hand-drawn pipe (white instead of green)
