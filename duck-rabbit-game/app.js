@@ -1,10 +1,3 @@
-const duckRabbit = {
-    x: CONFIG.canvas_width / 4,
-    y: CONFIG.canvas_height / 2,
-    velocity: 0,
-    size: CONFIG.sprite_size
-};
-
 // Game configuration
 const CONFIG = {
     canvas_width: 400,
