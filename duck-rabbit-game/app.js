@@ -1,21 +1,6 @@
 // Load duck-rabbit image
 const duckRabbitImg = new Image();
-duckRabbitImg.src = "duck-rabbit.png"; // place your image in the same folder
-
-// Draw duck-rabbit sprite (use image instead of procedural drawing)
-function drawDuckRabbit() {
-    const x = duckRabbit.x;
-    const y = duckRabbit.y;
-    const size = duckRabbit.size;
-
-    ctx.drawImage(
-        duckRabbitImg,
-        x - size / 2,
-        y - size / 2,
-        size,
-        size
-    );
-}
+duckRabbitImg.src = "duck-rabbit.png"; 
 
 // Draw hand-drawn pipe (white instead of green)
 function drawPipe(pipe) {
