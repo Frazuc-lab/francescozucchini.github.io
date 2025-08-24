@@ -282,7 +282,7 @@ function render() {
         ctx.fillStyle = '#333333';
         ctx.font = 'bold 24px Arial';
         ctx.textAlign = 'left';
-        ctx.fillText('Score: ' + score, 10, 35);
+        ctx.fillText('§. ' + score, 10, 35);
         
         // Draw instructions
         ctx.font = '12px Arial';
