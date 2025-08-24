@@ -1,3 +1,10 @@
+const duckRabbit = {
+    x: CONFIG.canvas_width / 4,
+    y: CONFIG.canvas_height / 2,
+    velocity: 0,
+    size: CONFIG.sprite_size
+};
+
 // Game configuration
 const CONFIG = {
     canvas_width: 400,
@@ -33,17 +40,22 @@ const duckRabbit = {
     size: CONFIG.sprite_size
 };
 
-// Load duck-rabbit image
+// Load duck-rabbit image safely
 const duckRabbitImg = new Image();
-duckRabbitImg.src = "duck-rabbit.png";
+duckRabbitImg.src = "duck-rabbit.png"; 
+let duckRabbitReady = false;
 
-// Draw duck-rabbit sprite
+duckRabbitImg.onload = () => {
+  duckRabbitReady = true;
+};
+
+// Draw duck-rabbit sprite using the PNG
 function drawDuckRabbit() {
     const x = duckRabbit.x;
     const y = duckRabbit.y;
     const size = duckRabbit.size;
 
-    if (duckRabbitImg.complete) {
+    if (duckRabbitReady) {
         ctx.drawImage(
             duckRabbitImg,
             x - size / 2,
@@ -51,6 +63,8 @@ function drawDuckRabbit() {
             size,
             size
         );
+    } else {
+        console.warn("Duck-Rabbit image not yet loaded");
     }
 }
 // Initialize game
