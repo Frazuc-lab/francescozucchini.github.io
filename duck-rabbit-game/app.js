@@ -323,7 +323,9 @@ function render() {
 
 // Main game loop
 function gameLoop() {
-    update();
+    update(
+        console.log(gameState, duckRabbit.y)
+    );
     render();
     requestAnimationFrame(gameLoop);
 }
