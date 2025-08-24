@@ -25,17 +25,24 @@ let pipes = [];
 let pipeTimer = 0;
 let frameCount = 0;
 
+// Duck-rabbit sprite state
+const duckRabbit = {
+    x: CONFIG.canvas_width / 4,
+    y: CONFIG.canvas_height / 2,
+    velocity: 0,
+    size: CONFIG.sprite_size
+};
+
 // Load duck-rabbit image
 const duckRabbitImg = new Image();
-duckRabbitImg.src = "duck-rabbit.png"; // make sure the file is in the same folder
+duckRabbitImg.src = "duck-rabbit.png";
 
-// Draw duck-rabbit sprite (now just the image)
+// Draw duck-rabbit sprite
 function drawDuckRabbit() {
     const x = duckRabbit.x;
     const y = duckRabbit.y;
     const size = duckRabbit.size;
 
-    // only draw if the image has finished loading
     if (duckRabbitImg.complete) {
         ctx.drawImage(
             duckRabbitImg,
@@ -46,7 +53,6 @@ function drawDuckRabbit() {
         );
     }
 }
-
 // Initialize game
 function init() {
     canvas = document.getElementById('gameCanvas');
@@ -193,10 +199,6 @@ function checkCollision(pipe) {
 function gameOver() {
     gameState = GAME_STATES.GAME_OVER;
 }
-
-// Load duck-rabbit image
-const duckRabbitImg = new Image();
-duckRabbitImg.src = "duck-rabbit.png"; 
 
 // Draw hand-drawn pipe (white instead of green)
 function drawPipe(pipe) {
