@@ -40,8 +40,9 @@ let duckRabbitReady = false;
 
 duckRabbitImg.onload = () => {
   duckRabbitReady = true;
-    gameLoop();  
+  console.log('Image loaded');
 };
+duckRabbitImg.src = "duck-rabbit.png";
 
 // Draw duck-rabbit sprite using the PNG
 function drawDuckRabbit() {
@@ -61,6 +62,7 @@ function drawDuckRabbit() {
         console.warn("Duck-Rabbit image not yet loaded");
     }
 }
+
 // Initialize game
 function init() {
     canvas = document.getElementById('gameCanvas');
@@ -79,6 +81,19 @@ function init() {
             handleInput();
         }
     });
+    
+    // Start game loop (but check if image is ready first)
+    if (duckRabbitReady) {
+        console.log('Image already loaded, starting game');
+        gameLoop();
+    } else {
+        console.log('Waiting for image to load...');
+        duckRabbitImg.onload = () => {
+            duckRabbitReady = true;
+            console.log('Image loaded, starting game');
+            gameLoop();
+        };
+    }
 }
 
 // Handle user input
