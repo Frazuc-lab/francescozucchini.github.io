@@ -316,12 +316,12 @@ function render() {
 
 // Main game loop
 function gameLoop() {
-    update(
-        console.log(gameState, duckRabbit.y)
-    );
+    console.log(gameState, duckRabbit.y);  // Separate debug line
+    update();                              // Call update() normally
     render();
     requestAnimationFrame(gameLoop);
 }
+
 
 // Initialize when page loads
 window.addEventListener('load', init);
