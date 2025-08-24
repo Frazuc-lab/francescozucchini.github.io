@@ -25,13 +25,27 @@ let pipes = [];
 let pipeTimer = 0;
 let frameCount = 0;
 
-// Duck-rabbit sprite
-const duckRabbit = {
-    x: CONFIG.canvas_width / 4,
-    y: CONFIG.canvas_height / 2,
-    velocity: 0,
-    size: CONFIG.sprite_size
-};
+// Load duck-rabbit image
+const duckRabbitImg = new Image();
+duckRabbitImg.src = "duck-rabbit.png"; // make sure the file is in the same folder
+
+// Draw duck-rabbit sprite (now just the image)
+function drawDuckRabbit() {
+    const x = duckRabbit.x;
+    const y = duckRabbit.y;
+    const size = duckRabbit.size;
+
+    // only draw if the image has finished loading
+    if (duckRabbitImg.complete) {
+        ctx.drawImage(
+            duckRabbitImg,
+            x - size / 2,
+            y - size / 2,
+            size,
+            size
+        );
+    }
+}
 
 // Initialize game
 function init() {
