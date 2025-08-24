@@ -333,12 +333,17 @@ function render() {
 
 // Main game loop
 function gameLoop() {
-    console.log(gameState, duckRabbit.y);  // Separate debug line
-    update();                              // Call update() normally
-    render();
-    requestAnimationFrame(gameLoop);
+    try {
+        console.log('Frame:', gameState, duckRabbit.y.toFixed(1));
+        update();
+        render();
+        requestAnimationFrame(gameLoop);
+    } catch (error) {
+        console.error('GAME CRASHED:', error);
+        console.error('Stack trace:', error.stack);
+        // Stop calling requestAnimationFrame so we can see the error
+    }
 }
-
 
 // Initialize when page loads
 window.addEventListener('load', init);
