@@ -477,9 +477,11 @@
     }
 
     .ladder-interests {
-        max-width: 80px;   /* adjust width as needed */
+        max-width: 20%;     /* takes up to 20% of the container’s width */
         height: auto;
-        opacity: 0.9;      /* makes it subtle */
+        opacity: 0.9;
+        min-width: 100px;   /* ensures it’s never too small */
+        max-height: 400px;  /* prevents it from growing too tall */
     }
         
     </style>
