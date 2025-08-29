@@ -516,15 +516,21 @@
    stack vertically on narrow viewports */
     @media (max-width: 900px) {
         .interests-wrapper {
-            lex-direction: column;
-            gap: 1rem;
+            flex-direction: column;   /* stack text and ladder vertically */
+            gap: 1.5rem;
         }
-      .ladder-interests {
-          width: 100%;
-          min-width: 0;
-          height: 220px;           /* a reasonable height for mobile; adjust if needed */
-          background-size: contain;
-      }
+        
+        .ladder-interests {
+            width: 100%;              /* full width on mobile */
+            min-width: 0;
+            height: 200px;            /* fixed height, so it doesn’t explode */
+            background-size: contain; /* fit inside without cropping */
+            background-position: center top;
+        }
+        
+        .interests-text {
+            width: 100%;
+        }
     }
     
         </style>
