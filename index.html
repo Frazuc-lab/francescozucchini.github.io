@@ -466,25 +466,67 @@
       transform: scale(1.2);
     }
 
+    /* --- Areas of Interest layout --- */
     .interests-wrapper {
         display: flex;
-        align-items: flex-start;
-        gap: 2rem; /* space between text and ladder */
+        align-items: stretch;   /* make both columns the same height */
+        gap: 2rem;
     }
 
     .interests-text {
         flex: 1;
     }
 
-    .ladder-interests {
-        max-width: 20%;     /* takes up to 20% of the container’s width */
-        height: auto;
-        opacity: 0.9;
-        min-width: 100px;   /* ensures it’s never too small */
-        max-height: 400px;  /* prevents it from growing too tall */
+    .interest-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
     }
-        
-    </style>
+
+    .interest-item {
+        position: relative;
+        padding-left: 1.2rem;
+        margin-bottom: 1rem;
+    }
+
+    .interest-item::before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        top: 0.15rem;
+        color: var(--muted-foreground);
+        font-size: 1.2rem;
+        line-height: 1;
+    }
+
+/* Ladder block: uses background image so it can fill container height exactly */
+    .ladder-interests {
+        width: 18%;
+        min-width: 140px;     /* prevents it from being too narrow on small screens */
+        max-width: 320px;     /* prevents it from taking over on large screens */
+        align-self: stretch;
+        background-image: url('ladder.png');
+        background-repeat: no-repeat; 
+        background-position: center center;
+        background-size: auto 100%;   /* scale image so its height matches the container height */
+        opacity: 0.95;
+    }
+
+/* Make sure wrapper doesn't create unwanted extra spacing on small screens:
+   stack vertically on narrow viewports */
+    @media (max-width: 900px) {
+        .interests-wrapper {
+            lex-direction: column;
+            gap: 1rem;
+        }
+      .ladder-interests {
+          width: 100%;
+          min-width: 0;
+          height: 220px;           /* a reasonable height for mobile; adjust if needed */
+          background-size: contain;
+      }
+    }
+
 
     <!-- Favicon -->
 <!-- Favicon setup -->
@@ -574,15 +616,17 @@
                                 <div class="interests-wrapper">
                                     <div class="interests-text">
                                         <h3>Areas of Interest:</h3>
-                                        <div id="researchInterests">
-                                            <div class="interest-item"><span class="academic-body">Ethics and Moral Philosophy</span></div>
-                                            <div class="interest-item"><span class="academic-body">Philosophy of Language</span></div>
-                                            <div class="interest-item"><span class="academic-body">Philosophy of Mind</span></div>
-                                            <div class="interest-item"><span class="academic-body">Wittgenstein</span></div>
-                                            <div class="interest-item"><span class="academic-body">Early Analytic Philosophy</span></div>
-                                        </div>
+                                        
+                                        <ul id="researchInterests" class="interest-list">
+                                            <li class="interest-item"><span class="academic-body">Ethics and Moral Philosophy</span></li>
+                                            <li class="interest-item"><span class="academic-body">Philosophy of Language</span></li>
+                                            <li class="interest-item"><span class="academic-body">Philosophy of Mind</span></li>
+                                            <li class="interest-item"><span class="academic-body">Wittgenstein</span></li>
+                                            <li class="interest-item"><span class="academic-body">Early Analytic Philosophy</span></li>
+                                        </ul>
                                     </div>
-                                    <img src="ladder.png" alt="Ladder Divider" class="ladder-interests">
+                                     <!-- ladder as a background block so it fills height reliably -->
+                                    <div class="ladder-interests" aria-hidden="true"></div>
                                 </div>
                             </div>
                         </div>
