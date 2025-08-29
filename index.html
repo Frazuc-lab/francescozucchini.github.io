@@ -288,15 +288,17 @@
             border: 1px solid var(--border);
             border-radius: 0.5rem;
             padding: 1.5rem;
-            margin-top: 1.5rem;
+            margin: 1.5rem 0;            /* no horizontal margin; aligns with container edges */ /* [web:7][web:22] */
+            width: 100%;                 /* fill the content column width */ /* [web:22] */
         }
-
+        
         .quote-text {
+            margin: 0;                   /* removes extra paragraph margins inside */ /* [web:24] */
             font-style: italic;
             color: var(--muted-foreground);
             line-height: 1.75;
         }
-
+        
         .footer {
             padding: 3rem 0;
             border-top: 1px solid var(--border);
