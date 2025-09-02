@@ -27,7 +27,8 @@
             --shadow-elegant: 0 10px 40px -12px hsl(30, 25%, 15%, 0.18);
             --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --font-serif: 'Playfair Display', serif;
-            --font-sans: 'Merriweather', serif;
+            --font-sans: 'Merriweather', serif; /* main body text */
+            --font-sans: 'Inter', sans-serif;  /* buttons, footer, etc. */
         }
 
         * {
@@ -197,6 +198,7 @@
             cursor: pointer;
             transition: var(--transition-smooth);
             border: 1px solid var(--border);
+            font-family: var(--font-sans);
         }
 
         .btn-outline {
@@ -290,7 +292,7 @@
             border-radius: 0.5rem;
             padding: 1.5rem;
             margin: 1.5rem 0;            /* no horizontal margin; aligns with container edges */ /* [web:7][web:22] */
-            width: 100%;                 /* fill the content column width */ /* [web:22] */
+            width: 90%;                 /* fill the content column width */ /* [web:22] */
         }
         
         .quote-text {
@@ -298,6 +300,7 @@
             font-style: italic;
             color: var(--muted-foreground);
             line-height: 1.75;
+            text-align: center;
         }
         
         .footer {
@@ -307,6 +310,7 @@
         }
 
         .footer-text {
+            font-family: var(--font-sans);
             font-size: 0.875rem;
             color: var(--muted-foreground);
         }
