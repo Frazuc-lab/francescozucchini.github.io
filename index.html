@@ -450,20 +450,21 @@
             background: var(--accent);
         }
         
-        .game-icon {
-            display: block;   
-            margin-top: 16px;        /* space under the CV button */
-        }
+       .game-icon { 
+           position: absolute; 
+           top: 16px; 
+           right: 16px; 
+           z-index: 999; 
+       } 
         
-        .game-icon img {
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            transition: transform 0.2s ease
-        }
-        
-        .game-icon img:hover {
-            transform: scale(1.2);
+        .game-icon img { 
+            width: 40px; 
+            height: 40px; 
+            cursor: pointer; 
+            transition: transform 0.2s ease; 
+        } 
+        .game-icon img:hover { 
+            transform: scale(1.2); 
         }
 
     /* --- Areas of Interest layout --- */
@@ -547,6 +548,10 @@
 </head>
 <body>
 
+    <a href="duck-rabbit-game/index.html" target="_blank" class="game-icon"> 
+        <img src="duckrabbit_icon.png"> 
+    </a>
+    
     <main>
         <!-- Hero Section -->
         <section class="hero-section">
