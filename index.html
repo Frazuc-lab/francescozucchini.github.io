@@ -449,24 +449,22 @@
             border-color: var(--primary);
             background: var(--accent);
         }
-
-         .game-icon {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      z-index: 999;
-    }
-
-    .game-icon img {
-      width: 40px;
-      height: 40px;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-    }
-
-    .game-icon img:hover {
-      transform: scale(1.2);
-    }
+        
+        .game-icon {
+            display: inline-block;   /* makes it behave like a button/link */
+            margin-top: 8px;        /* space under the CV button */
+        }
+        
+        .game-icon img {
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            transition: transform 0.2s ease
+        }
+        
+        .game-icon img:hover {
+            transform: scale(1.2);
+        }
 
     /* --- Areas of Interest layout --- */
     .interests-wrapper {
@@ -548,10 +546,6 @@
 
 </head>
 <body>
-     <!-- 🔽 Add the game icon link here -->
-  <a href="duck-rabbit-game/index.html" target="_blank" class="game-icon">
-    <img src="duckrabbit_icon.png">
-  </a>
 
     <main>
         <!-- Hero Section -->
@@ -578,6 +572,11 @@
 
                             <div class="button-container">
                                   <a href="cv.pdf" class="btn btn-primary" target="_blank">Curriculum Vitae</a>
+                                
+                                  <a href="duck-rabbit-game/index.html" target="_blank" class="game-icon">
+                                      <img src="duckrabbit_icon.png">
+                                  </a>
+
                             </div>
                         </div>
                     </div>
