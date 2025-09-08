@@ -97,30 +97,45 @@
             }
         }
 
-        .hero-image {
+       /* nuovo wrapper slideshow */
+        .hero-container {
+            position: relative;
             width: 100%;
             height: 400px;
-            object-fit: cover;
             border-radius: 0.5rem;
+            overflow: hidden;
             box-shadow: var(--shadow-elegant);
-            background-image: url('slide-1.jpeg');
+        }
+        
+        /* immagine gestita via JS */
+        .hero-image {
+            width: 100%;
+            height: 100%;
             background-size: cover;
             background-position: center;
-            background-repeat: no-repeat;
+            transition: background-image 0.5s ease-in-out;
+            border-radius: 0.5rem;
         }
-
-        .hero-image.fallback {
-            background: linear-gradient(135deg, #8B7355 0%, #A0916B 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        
+        /* bottoni prev/next */
+        .hero-container button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.4);
+            border: none;
             color: white;
-            font-family: var(--font-serif);
-            font-size: 1.5rem;
+            font-size: 2rem;
+            padding: 0.5rem 1rem; 
+            cursor: pointer;
+            border-radius: 0.25rem;
         }
-
+        
+        .hero-container .prev { left: 1rem; }
+        .hero-container .next { right: 1rem; }
+        
         @media (min-width: 1024px) {
-            .hero-image {
+            .hero-container {
                 height: 500px;
             }
             .lg-pl-8 {
@@ -564,7 +579,11 @@
                 <div class="grid">
                     <!-- Left side - Visual -->
                     <div class="col-span-5">
-                        <div class="hero-image" id="heroImage"></div>
+                        <div class="hero-container">
+                            <div class="hero-image" id="heroImage"></div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
+                        </div>
                     </div>
 
                     <!-- Right side - Name and Title -->
@@ -698,5 +717,38 @@
     </main>
     
     </script>
+
+    <script>
+        const images = [
+            "slide-1.jpeg",
+            "slide-2.jpeg",
+            "slide-3.jpeg"
+        ];
+        
+        let currentIndex = 0;
+        const heroImage = document.getElementById("heroImage");
+        
+        function showImage(index) {
+            heroImage.style.backgroundImage = `url('${images[index]}')`;
+        }
+        
+        showImage(currentIndex);
+        
+        document.querySelector(".prev").addEventListener("click", () => {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            showImage(currentIndex);
+        });
+        
+        document.querySelector(".next").addEventListener("click", () => {
+            currentIndex = (currentIndex + 1) % images.length;
+            showImage(currentIndex);
+        });
+        
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % images.length;
+            showImage(currentIndex);
+        }, 5000);
+    </script>
+    
 </body>
 </html>
