@@ -91,110 +91,42 @@
             padding: 4rem 0 6rem;
         }
 
-        /* Layout hero: mobile → desktop */
-        .hero-section .grid {
-            display: grid;
-            gap: 1.5rem;
-            grid-template-columns: 1fr; /* Mobile: stack verticale */
-        }
-        
         @media (min-width: 1024px) {
-            .hero-section .grid {
-                grid-template-columns: 5fr 7fr; /* Desktop: immagine | testo */
-                align-items: center; /* opzionale: allinea verticalmente il testo */
+            .hero-section {
+                padding: 6rem 0 8rem;
             }
         }
 
         .hero-image {
             width: 100%;
-            aspect-ratio: 3 / 4;          /* verticale “ritratto” */
-            background-size: cover;       /* riempi senza distorcere */
-            background-position: center;
-            background-repeat: no-repeat;
+            height: 400px;
+            object-fit: cover;
             border-radius: 0.5rem;
             box-shadow: var(--shadow-elegant);
-            animation: hero-slides 18s infinite ease-in-out;
+            background-image: url('public/academic-hero.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .hero-image.fallback {
+            background: linear-gradient(135deg, #8B7355 0%, #A0916B 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
         }
 
         @media (min-width: 1024px) {
             .hero-image {
-                max-width: 520px;      /* opzionale */
+                height: 500px;
+            }
+            .lg-pl-8 {
+                padding-left: 2rem;
             }
         }
-        
-        /* cross-fade preload: coppie di immagini adiacenti */
-        @keyframes hero-slides {
-            
-            0%, 28% {
-                background-image: url('public/slide1.jpg'), url('public/slide2.jpg');
-            }
-            
-            33%, 61% {
-                background-image: url('public/slide2.jpg'), url('public/slide3.jpg');
-            }
-            
-            66%, 100% {
-                background-image: url('public/slide3.jpg'), url('public/slide1.jpg');
-            }
-        }
-        
-        @media (min-width: 1024px) {
-            .hero-image {  
-                max-width: 520px;        /* o max-height, non entrambi con height */
-                margin-inline: auto;     /* opzionale: centra il riquadro nella colonna */
-            }  
-        }
-
-        /* Wrapper per isolare la logica del carousel e aumentare leggermente la specificità */
-        .hero-carousel {
-            position: relative;
-        }
-        
-        .hero-carousel input[type="radio"] {
-            position: absolute;
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .hero-carousel:hover .hero-image,
-        .hero-carousel:focus-within .hero-image {
-            animation-play-state: paused;
-        }
-        
-        .hero-carousel #h1:checked ~ .hero-image { background-image: url('public/slide1.jpg'); }
-        .hero-carousel #h2:checked ~ .hero-image { background-image: url('public/slide2.jpg'); }
-        .hero-carousel #h3:checked ~ .hero-image { background-image: url('public/slide3.jpg'); }
-        
-        .hero-carousel .hero-dots {
-            position: absolute;
-            left: 0;               /* più esplicito di inset-inline per questo caso */
-            right: 0;
-            bottom: 1rem;
-            display: flex;
-            justify-content: center;
-            gap: .5rem;
-            z-index: 2;
-            mix-blend-mode: normal; /* mantiene il colore pieno sui fondi variabili */
-        }
-        
-        .hero-carousel .hero-dots label {
-            width: .6rem;
-            height: .6rem;
-            border-radius: 999px;
-            background: rgba(255,255,255,.6);
-            cursor: pointer;
-            box-shadow: 0 0 0 1px rgba(0,0,0,.15) inset;
-            transition: transform .2s ease, background-color .2s ease;
-        }
-        
-        .hero-carousel .hero-dots label:hover { transform: scale(1.08); }
-        .hero-carousel #h1:checked ~ .hero-dots label:nth-child(1),
-        .hero-carousel #h2:checked ~ .hero-dots label:nth-child(2),
-        .hero-carousel #h3:checked ~ .hero-dots label:nth-child(3) {
-            background: white;
-        }
-        
-        .hero-carousel .hero-dots { mix-blend-mode: normal; }
 
         .academic-title {
             font-family: var(--font-serif);
@@ -460,6 +392,68 @@
         .btn-primary:hover {
             opacity: 0.9;
         }
+
+        /* Admin Panel Styles */
+        .admin-panel {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 400px;
+            height: 100vh;
+            background: var(--background);
+            border-left: 1px solid var(--border);
+            box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .admin-panel.active {
+            display: block;
+        }
+
+        .admin-header {
+            margin-bottom: 2rem;
+        }
+
+        .admin-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: var(--primary-foreground);
+            border: none;
+            padding: 0.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1001;
+            opacity: 0.1;
+        }
+
+        .admin-toggle:hover {
+            opacity: 1;
+        }
+
+        .image-upload-area {
+            border: 2px dashed var(--border);
+            border-radius: 0.5rem;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .image-upload-area:hover {
+            border-color: var(--primary);
+            background: var(--accent);
+        }
+
+        .image-upload-area.drag-over {
+            border-color: var(--primary);
+            background: var(--accent);
+        }
         
        .game-icon { 
            position: absolute; 
@@ -543,15 +537,7 @@
         .interests-text {
             width: 100%;
         }
-
-        @media (min-width: 1024px) {
-            .hero-section > .container > .grid {
-                display: grid;
-                grid-template-columns: 5fr 7fr;
-                gap: 1.5rem;
-                align-items: center;
-            }
-        }
+    }
     
         </style>
 
@@ -576,24 +562,14 @@
         <section class="hero-section">
             <div class="container">
                 <div class="grid">
+                    <!-- Left side - Visual -->
                     <div class="col-span-5">
-                        <div class="hero-carousel">
-                            <input type="radio" name="hslide" id="h1" checked>
-                            <input type="radio" name="hslide" id="h2">
-                            <input type="radio" name="hslide" id="h3">
-                            
-                        <div class="hero-dots" role="tablist" aria-label="Selettore slide">
-                            <label for="h1" role="tab" aria-label="Slide 1"></label>
-                            <label for="h2" role="tab" aria-label="Slide 2"></label>
-                            <label for="h3" role="tab" aria-label="Slide 3"></label>
-                        </div>
-                        
                         <div class="hero-image" id="heroImage"></div>
                     </div>
-                    </div>       
 
                     <!-- Right side - Name and Title -->
                     <div class="col-span-7 lg-pl-8">
+                        <div>
                             <h1 class="academic-title" id="profileName">Francesco Zucchini</h1>
                             <p class="academic-subtitle" id="profileTitle">Philosophy PhD Student at Sapienza University of Rome</p>
                             
