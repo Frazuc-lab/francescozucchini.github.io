@@ -103,30 +103,75 @@
             object-fit: cover;
             border-radius: 0.5rem;
             box-shadow: var(--shadow-elegant);
-            background-image: url('public/academic-hero.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            animation: hero-slides 18s infinite ease-in-out;
         }
-
-        .hero-image.fallback {
-            background: linear-gradient(135deg, #8B7355 0%, #A0916B 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-family: var(--font-serif);
-            font-size: 1.5rem;
+        
+        /* cross-fade preload: coppie di immagini adiacenti */
+        @keyframes hero-slides {
+            
+            0%, 28% {
+                background-image: url('public/slide1.jpg'), url('public/slide2.jpg');
+            }
+            
+            33%, 61% {
+                background-image: url('public/slide2.jpg'), url('public/slide3.jpg');
+            }
+            
+            66%, 100% {
+                background-image: url('public/slide3.jpg'), url('public/slide1.jpg');
+            }
         }
-
+        
         @media (min-width: 1024px) {
-            .hero-image {
-                height: 500px;
-            }
-            .lg-pl-8 {
-                padding-left: 2rem;
-            }
+            .hero-image { height: 500px; }
         }
+
+        /* Wrapper per isolare la logica del carousel e aumentare leggermente la specificità */
+        .hero-carousel {
+            position: relative;
+        }
+        
+        .hero-carousel input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .hero-carousel #h1:checked ~ .hero-image { background-image: url('public/slide1.jpg'); }
+        .hero-carousel #h2:checked ~ .hero-image { background-image: url('public/slide2.jpg'); }
+        .hero-carousel #h3:checked ~ .hero-image { background-image: url('public/slide3.jpg'); }
+        
+        .hero-carousel .hero-dots {
+            position: absolute;
+            inset-inline: 0;
+            bottom: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: .5rem;
+            z-index: 2;
+        }
+        
+        .hero-carousel .hero-dots label {
+            width: .6rem;
+            height: .6rem;
+            border-radius: 999px;
+            background: rgba(255,255,255,.6);
+            cursor: pointer;
+            box-shadow: 0 0 0 1px rgba(0,0,0,.15) inset;
+            transition: transform .2s ease, background-color .2s ease;
+        }
+        
+        .hero-carousel .hero-dots label:hover { transform: scale(1.08); }
+        .hero-carousel #h1:checked ~ .hero-dots label:nth-child(1),
+        .hero-carousel #h2:checked ~ .hero-dots label:nth-child(2),
+        .hero-carousel #h3:checked ~ .hero-dots label:nth-child(3) {
+            background: white;
+        }
+        
+        .hero-carousel .hero-dots { mix-blend-mode: normal; }
 
         .academic-title {
             font-family: var(--font-serif);
@@ -562,8 +607,18 @@
         <section class="hero-section">
             <div class="container">
                 <div class="grid">
-                    <!-- Left side - Visual -->
                     <div class="col-span-5">
+                        <div class="hero-carousel">
+                            <input type="radio" name="hslide" id="h1" checked>
+                            <input type="radio" name="hslide" id="h2">
+                            <input type="radio" name="hslide" id="h3">
+                            
+                        <div class="hero-dots">
+                            <label for="h1" aria-label="Slide 1"></label>
+                            <label for="h2" aria-label="Slide 2"></label>
+                            <label for="h3" aria-label="Slide 3"></label>
+                        </div>
+                        
                         <div class="hero-image" id="heroImage"></div>
                     </div>
 
