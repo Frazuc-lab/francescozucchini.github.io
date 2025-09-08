@@ -91,9 +91,17 @@
             padding: 4rem 0 6rem;
         }
 
+        /* Layout hero: mobile → desktop */
+        .hero-section .grid {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: 1fr; /* Mobile: stack verticale */
+        }
+        
         @media (min-width: 1024px) {
-            .hero-section {
-                padding: 6rem 0 8rem;
+            .hero-section .grid {
+                grid-template-columns: 5fr 7fr; /* Desktop: immagine | testo */
+                align-items: center; /* opzionale: allinea verticalmente il testo */
             }
         }
 
@@ -138,6 +146,11 @@
             position: absolute;
             opacity: 0;
             pointer-events: none;
+        }
+
+        .hero-carousel:hover .hero-image,
+        .hero-carousel:focus-within .hero-image {
+            animation-play-state: paused;
         }
         
         .hero-carousel #h1:checked ~ .hero-image { background-image: url('public/slide1.jpg'); }
@@ -613,18 +626,18 @@
                             <input type="radio" name="hslide" id="h2">
                             <input type="radio" name="hslide" id="h3">
                             
-                        <div class="hero-dots">
-                            <label for="h1" aria-label="Slide 1"></label>
-                            <label for="h2" aria-label="Slide 2"></label>
-                            <label for="h3" aria-label="Slide 3"></label>
+                        <div class="hero-dots" role="tablist" aria-label="Selettore slide">
+                            <label for="h1" role="tab" aria-label="Slide 1"></label>
+                            <label for="h2" role="tab" aria-label="Slide 2"></label>
+                            <label for="h3" role="tab" aria-label="Slide 3"></label>
                         </div>
                         
                         <div class="hero-image" id="heroImage"></div>
                     </div>
+                    </div>       
 
                     <!-- Right side - Name and Title -->
                     <div class="col-span-7 lg-pl-8">
-                        <div>
                             <h1 class="academic-title" id="profileName">Francesco Zucchini</h1>
                             <p class="academic-subtitle" id="profileTitle">Philosophy PhD Student at Sapienza University of Rome</p>
                             
