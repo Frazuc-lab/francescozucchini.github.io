@@ -107,14 +107,19 @@
 
         .hero-image {
             width: 100%;
-            height: 400px;
-            object-fit: cover;
-            border-radius: 0.5rem;
-            box-shadow: var(--shadow-elegant);
-            background-size: cover;
+            aspect-ratio: 3 / 4;          /* verticale “ritratto” */
+            background-size: cover;       /* riempi senza distorcere */
             background-position: center;
             background-repeat: no-repeat;
+            border-radius: 0.5rem;
+            box-shadow: var(--shadow-elegant);
             animation: hero-slides 18s infinite ease-in-out;
+        }
+
+        @media (min-width: 1024px) {
+            .hero-image {
+                max-width: 520px;      /* opzionale */
+            }
         }
         
         /* cross-fade preload: coppie di immagini adiacenti */
