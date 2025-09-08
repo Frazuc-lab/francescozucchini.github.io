@@ -103,28 +103,42 @@
             object-fit: cover;
             border-radius: 0.5rem;
             box-shadow: var(--shadow-elegant);
-            background-image: url('public/academic-hero.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            transition: background-image 1s ease-in-out; /* per un cambio più fluido */
+            position: relative; /* per contenere le frecce */
         }
-
-        .hero-image.fallback {
-            background: linear-gradient(135deg, #8B7355 0%, #A0916B 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        
+        .hero-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.4);
             color: white;
-            font-family: var(--font-serif);
-            font-size: 1.5rem;
+            border: none;
+            font-size: 2rem;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: background 0.3s ease
         }
-
+        
+        .hero-arrow:hover {
+            background: rgba(0,0,0,0.7);
+        }
+        
+        .hero-arrow.left {
+            left: 10px;
+        }
+        
+        .hero-arrow.right {
+            right: 10px;
+        }
+        
         @media (min-width: 1024px) {
             .hero-image {
                 height: 500px;
-            }
-            .lg-pl-8 {
-                padding-left: 2rem;
             }
         }
 
@@ -562,10 +576,51 @@
         <section class="hero-section">
             <div class="container">
                 <div class="grid">
+                    
                     <!-- Left side - Visual -->
                     <div class="col-span-5">
                         <div class="hero-image" id="heroImage"></div>
                     </div>
+
+                    <!-- Images -->
+                    <div class="hero-image">
+                        <button class="hero-arrow left">&#10094;</button> <!-- freccia sinistra -->
+                        <button class="hero-arrow right">&#10095;</button> <!-- freccia destra -->
+                    </div>
+
+                    <script>
+                        const immagini = [
+                            'public/foto1.jpg',
+                            'public/foto2.jpg',
+                            'public/foto3.jpg'
+                        ];
+                        
+                        let indice = 0;
+                        const hero = document.querySelector('.hero-image');
+                        const leftArrow = document.querySelector('.hero-arrow.left');
+                        const rightArrow = document.querySelector('.hero-arrow.right');
+                        
+                        function mostraImmagine(i) {
+                            indice = (i + immagini.length) % immagini.length; // evita valori negativi
+                            hero.style.backgroundImage = `url('${immagini[indice]}')`;
+                        }
+                        
+                        function avanti() {
+                            mostraImmagine(indice + 1);
+                        }
+                        
+                        function indietro() {
+                            mostraImmagine(indice - 1);
+                        }
+                        
+                        // click manuali
+                        leftArrow.addEventListener('click', indietro);
+                        rightArrow.addEventListener('click', avanti);
+                        
+                        // avvio slideshow
+                        mostraImmagine(indice);
+                        setInterval(avanti, 5000); // cambia ogni 5 secondi
+                    </script>
 
                     <!-- Right side - Name and Title -->
                     <div class="col-span-7 lg-pl-8">
