@@ -565,6 +565,10 @@
 <link rel="manifest" href="favicon_io/site.webmanifest">
 <link rel="shortcut icon" href="favicon_io/favicon.ico">
 
+<link rel="preload" as="image" href="slide-1.jpeg">
+    
+<body>
+
 </head>
 <body>
 
@@ -725,7 +729,13 @@
             "slide-3.jpeg",
             "slide-4.jpeg",
         ];
-        
+
+          // 🔹 Precarica tutte le immagini dello slideshow
+        images.forEach(src => {
+            const img = new Image();
+            img.src = src;
+        });
+
         let currentIndex = 0;
         const heroImage = document.getElementById("heroImage");
         
