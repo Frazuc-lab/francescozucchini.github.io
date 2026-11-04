@@ -109,14 +109,21 @@
             box-shadow: var(--shadow-elegant);
         }
         
-        /* immagine gestita via JS */
+        /* Two overlapping layers enable a real opacity crossfade. */
         .hero-image {
+            position: absolute;
+            inset: 0;
             width: 100%;
             height: 100%;
             background-size: cover;
             background-position: center;
-            border-radius: 0.5rem;
+            opacity: 0;
+            transition: opacity 650ms ease-in-out;
         }
+
+        .hero-image.is-active { opacity: 1; }
+        .hero-image:first-child { background-image: url('Foto/slide-1.webp'); }
+        .hero-container button { z-index: 2; }
         
         /* bottoni prev/next */
         .hero-container button {
@@ -602,7 +609,8 @@
                     <!-- Left side - Visual -->
                     <div class="col-span-5">
                         <div class="hero-container">
-                            <div class="hero-image" id="heroImage"></div>
+                            <div class="hero-image is-active" id="heroImage" role="img" aria-label="Photograph 1 of 4"></div>
+                            <div class="hero-image" id="heroImageNext" aria-hidden="true"></div>
                             <button class="prev" type="button" aria-label="Previous photograph">&#10094;</button>
                             <button class="next" type="button" aria-label="Next photograph">&#10095;</button>
                         </div>
@@ -736,41 +744,105 @@
     </footer>
 
     <script>
-        const images = [  
+        const images = [
             "Foto/slide-1.webp",
             "Foto/slide-2.webp",
             "Foto/slide-3.webp",
-            "Foto/slide-4.webp",
+            "Foto/slide-4.webp"
         ];
 
-        // Only the first slide is preloaded in <head>.
-        // Subsequent slides load on demand to save bandwidth on mobile.
-
+        const slides = [
+            document.getElementById("heroImage"),
+            document.getElementById("heroImageNext")
+        ];
+        const previousButton = document.querySelector(".hero-container .prev");
+        const nextButton = document.querySelector(".hero-container .next");
+        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+        const loadedImages = new Map();
         let currentIndex = 0;
-        const heroImage = document.getElementById("heroImage");
-        
-        function showImage(index) {
-            heroImage.style.backgroundImage = `url('${images[index]}')`;
+        let activeLayer = 0;
+        let isTransitioning = false;
+        let autoplayTimer;
+        let requestToken = 0;
+
+        function loadImage(index) {
+            if (loadedImages.has(index)) return loadedImages.get(index);
+            const img = new Image();
+            const pending = new Promise((resolve, reject) => {
+                img.onload = () => resolve();
+                img.onerror = () => reject(new Error("Unable to load " + images[index]));
+                img.src = images[index];
+                if (img.complete && img.naturalWidth > 0) resolve();
+            });
+            loadedImages.set(index, pending);
+            pending.catch(() => loadedImages.delete(index));
+            return pending;
         }
-        
-        showImage(currentIndex);
-        
-        document.querySelector(".prev").addEventListener("click", () => {
-            currentIndex = (currentIndex - 1 + images.length) % images.length;
-            showImage(currentIndex);
-        });
-        
-        document.querySelector(".next").addEventListener("click", () => {
-            currentIndex = (currentIndex + 1) % images.length;
-            showImage(currentIndex);
-        });
-        
-        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-            setInterval(() => {
-                currentIndex = (currentIndex + 1) % images.length;
-                showImage(currentIndex);
-            }, 5000);
+
+        function preloadFollowingImage() {
+            const nextIndex = (currentIndex + 1) % images.length;
+            loadImage(nextIndex).catch(() => {});
         }
+
+        function scheduleAutoplay() {
+            clearTimeout(autoplayTimer);
+            if (!reducedMotion.matches && !document.hidden) {
+                autoplayTimer = setTimeout(() => changeSlide(1), 5000);
+            }
+        }
+
+        async function changeSlide(direction) {
+            if (isTransitioning) return;
+            const nextIndex = (currentIndex + direction + images.length) % images.length;
+            if (nextIndex === currentIndex) return;
+            const token = ++requestToken;
+            isTransitioning = true;
+            clearTimeout(autoplayTimer);
+
+            try {
+                // Keep the current photo visible until the replacement is downloaded.
+                await loadImage(nextIndex);
+                if (token !== requestToken) return;
+                const incomingLayer = 1 - activeLayer;
+                const outgoing = slides[activeLayer];
+                const incoming = slides[incomingLayer];
+                incoming.style.zIndex = "1";
+                outgoing.style.zIndex = "0";
+                incoming.style.backgroundImage = 'url("' + images[nextIndex] + '")';
+                incoming.setAttribute("aria-label", "Photograph " + (nextIndex + 1) + " of " + images.length);
+                incoming.setAttribute("role", "img");
+                outgoing.removeAttribute("role");
+                outgoing.setAttribute("aria-hidden", "true");
+                incoming.removeAttribute("aria-hidden");
+
+                // Ensure the browser paints the replacement before fading it in.
+                await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+                incoming.classList.add("is-active");
+                await new Promise(resolve => setTimeout(resolve, reducedMotion.matches ? 0 : 670));
+                outgoing.classList.remove("is-active");
+                currentIndex = nextIndex;
+                activeLayer = incomingLayer;
+                preloadFollowingImage();
+            } catch (error) {
+                console.warn("Slideshow image could not be loaded:", error);
+            } finally {
+                isTransitioning = false;
+                scheduleAutoplay();
+            }
+        }
+
+        previousButton.addEventListener("click", () => changeSlide(-1));
+        nextButton.addEventListener("click", () => changeSlide(1));
+        document.addEventListener("visibilitychange", scheduleAutoplay);
+        if (typeof reducedMotion.addEventListener === "function") {
+            reducedMotion.addEventListener("change", scheduleAutoplay);
+        }
+
+        // Defer downloading the following photo until the first page has loaded.
+        window.addEventListener("load", () => {
+            setTimeout(preloadFollowingImage, 500);
+        }, { once: true });
+        scheduleAutoplay();
     </script>
     
 </body>
