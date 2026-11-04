@@ -194,7 +194,7 @@
             align-items: center;
             gap: 0.5rem;
             color: var(--muted-foreground);
-            margin-bottom: 2rem;
+            margin-bottom: 0.5rem;
         }
 
         .email-text {
@@ -205,6 +205,27 @@
 
         .email-container .icon { flex-shrink: 0; }
         .email-container a { color: inherit; text-underline-offset: 0.2em; }
+
+        .profile-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--muted-foreground);
+            font-family: var(--font-sans);
+            font-size: 0.875rem;
+            text-decoration: underline;
+            text-underline-offset: 0.2em;
+        }
+
+        .profile-link:hover { color: var(--foreground); }
+
+        .academic-body a {
+            color: inherit;
+            text-decoration: underline;
+            text-decoration-color: var(--muted-foreground);
+            text-underline-offset: 0.2em;
+        }
+
+        .academic-body a:hover { text-decoration-color: currentColor; }
 
         .icon {
             width: 1rem;
@@ -628,6 +649,7 @@
                                 </svg>
                                 <a class="email-text" id="profileEmail" href="mailto:francesco.zucchini@uniroma1.it">francesco.zucchini@uniroma1.it</a>
                             </div>
+                            <a class="profile-link" href="https://www.linkedin.com/in/francesco-zucchini-967b941b0" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile (opens in a new tab)">LinkedIn</a>
 
                             <div class="button-container">
                                   <a href="cv.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Curriculum Vitae</a>
@@ -652,7 +674,7 @@
                                 I am a Philosophy PhD student at Sapienza University of Rome, with an interest in fundamental questions about ethics, language, and the nature of philosophical inquiry. 
                             </p>
                             <p class="academic-body" id="profileAbout">
-                                Beyond philosophy, I like reading fiction, watching movies and TV series, eating, and playing games.
+                                Beyond philosophy, I like <a href="https://www.goodreads.com/user/show/199678522" target="_blank" rel="noopener noreferrer" aria-label="reading fiction — Goodreads profile (opens in a new tab)">reading fiction</a>, watching movies and TV series, eating, and playing games.
                             </p>
                             
                                 <div class="research-interests">
