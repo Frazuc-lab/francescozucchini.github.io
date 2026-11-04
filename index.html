@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Francesco Zucchini - Philosophy PhD Student</title>
     <meta name="description" content="Francesco Zucchini, Philosophy PhD Student.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
@@ -113,7 +115,6 @@
             height: 100%;
             background-size: cover;
             background-position: center;
-            transition: background-image 0.5s ease-in-out;
             border-radius: 0.5rem;
         }
         
@@ -196,6 +197,7 @@
         }
 
         .email-container .icon { flex-shrink: 0; }
+        .email-container a { color: inherit; text-underline-offset: 0.2em; }
 
         .icon {
             width: 1rem;
@@ -301,13 +303,6 @@
             gap: 0.5rem;
             margin-bottom: 0.5rem;
             position: relative;
-        }
-
-        .interest-item::before {
-            content: "•";
-            color: var(--muted-foreground);
-            font-size: 1.2rem;
-            line-height: 2;
         }
 
         .quote-card {
@@ -584,7 +579,6 @@
 
 
     <!-- Favicon -->
-<!-- Favicon setup -->
 <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
@@ -596,8 +590,8 @@
 </head>
 <body>
 
-    <a href="duck-rabbit-game/index.html" target="_blank" class="game-icon"> 
-        <img src="duckrabbit_icon.png" alt="Play the duck-rabbit game"> 
+    <a href="duck-rabbit-game/index.html" target="_blank" rel="noopener noreferrer" class="game-icon" aria-label="Play the duck-rabbit game (opens in a new tab)"> 
+        <img src="duckrabbit_icon.png" alt="" width="40" height="40"> 
     </a>
     
     <main>
@@ -624,11 +618,11 @@
                                 <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                                 </svg>
-                                <span class="email-text" id="profileEmail">francesco.zucchini@uniroma1.it</span>
+                                <a class="email-text" id="profileEmail" href="mailto:francesco.zucchini@uniroma1.it">francesco.zucchini@uniroma1.it</a>
                             </div>
 
                             <div class="button-container">
-                                  <a href="cv.pdf" class="btn btn-primary" target="_blank">Curriculum Vitae</a>
+                                  <a href="cv.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Curriculum Vitae</a>
 
                             </div>
                         </div>
@@ -688,7 +682,7 @@
                              <p class="academic-body" id="profileResearch">
                                 My research examines Cora Diamond’s contributions to contemporary philosophical debates, emphasizing the significance of Wittgenstein’s philosophy for ethics. My project focuses both on Diamond's "resolute" reading of the Tractatus and on her original, anti-theoretical perspective on moral philosophy.
                              </p>
-                             <p class="academic-body" id="profileResearch">
+                             <p class="academic-body">
                                 I am interested in metaethical questions concerning the scope and limits of philosophy, and the consequences of these limits for moral thought and contemporary philosophical discourse.
                                 Not surprisingly, I enjoy engaging with approaches that bridge philosophical inquiry with other fields of study, and I'm particularly interested in the relationship between philosophy and the arts.
                              </p>
@@ -730,15 +724,16 @@
              </p>
          </div>
 
-        <!-- Footer -->
-        <footer class="footer">
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
             <div class="container">
                 <p class="footer-text">
                     © 2026 <span id="footerName">Francesco Zucchini</span>. Built with care for excellence.
                 </p>
             </div>
-        </footer>
-    </main>
+    </footer>
 
     <script>
         const images = [  
@@ -748,11 +743,8 @@
             "Foto/slide-4.webp",
         ];
 
-          // 🔹 Precarica tutte le immagini dello slideshow
-        images.forEach(src => {
-            const img = new Image();
-            img.src = src;
-        });
+        // Only the first slide is preloaded in <head>.
+        // Subsequent slides load on demand to save bandwidth on mobile.
 
         let currentIndex = 0;
         const heroImage = document.getElementById("heroImage");
