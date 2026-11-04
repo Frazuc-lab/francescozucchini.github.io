@@ -806,6 +806,8 @@
                 const incomingLayer = 1 - activeLayer;
                 const outgoing = slides[activeLayer];
                 const incoming = slides[incomingLayer];
+                incoming.style.zIndex = "1";
+                outgoing.style.zIndex = "0";
                 incoming.style.backgroundImage = 'url("' + images[nextIndex] + '")';
                 incoming.setAttribute("aria-label", "Photograph " + (nextIndex + 1) + " of " + images.length);
                 incoming.setAttribute("role", "img");
