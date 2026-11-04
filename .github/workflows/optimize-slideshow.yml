@@ -42,5 +42,13 @@ jobs:
           git add Foto/slide-*.webp
           if ! git diff --cached --quiet; then
             git commit -m "Optimize slideshow WebP photographs for faster loading"
-            git push
+            for attempt in 1 2 3 4 5; do
+              if git push; then
+                exit 0
+              fi
+              echo "Push failed (attempt $attempt), retrying..."
+              sleep $((attempt * 3))
+            done
+            echo "Could not push compressed photographs" >&2
+            exit 1
           fi
