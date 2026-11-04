@@ -129,10 +129,14 @@
             padding: 0.5rem 1rem; 
             cursor: pointer;
             border-radius: 0.25rem;
+            min-width: 44px;
+            min-height: 44px;
+            background: rgba(0, 0, 0, 0.2);
         }
         
-        .hero-container .prev { left: 1rem; }
-        .hero-container .next { right: 1rem; }
+        .hero-container .prev { left: 0.5rem; }
+        .hero-container .next { right: 0.5rem; }
+        .hero-container button:focus-visible, a:focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; }
         
         @media (min-width: 1024px) {
             .hero-container {
@@ -188,7 +192,10 @@
         .email-text {
             font-family: 'Courier New', monospace;
             font-size: 0.875rem;
+            overflow-wrap: anywhere;
         }
+
+        .email-container .icon { flex-shrink: 0; }
 
         .icon {
             width: 1rem;
@@ -199,6 +206,7 @@
             display: flex;
             gap: 1rem;
             margin-top: 1rem;
+            flex-wrap: wrap;
         }
 
         .btn {
@@ -214,6 +222,7 @@
             transition: var(--transition-smooth);
             border: 1px solid var(--border);
             font-family: var(--font-sans);
+            min-height: 44px;
         }
 
         .btn-outline {
@@ -544,7 +553,7 @@
         .ladder-interests {
             width: 100%;              /* full width on mobile */
             min-width: 0;
-            height: 200px;            /* fixed height, so it doesn’t explode */
+            height: 160px;            /* compact on narrow screens */
             background-size: contain; /* fit inside without cropping */
             background-position: center top;
         }
@@ -554,6 +563,23 @@
         }
     }
     
+        @media (max-width: 767px) {
+            .container { padding: 0 1.25rem; }
+            .hero-section { padding: 3rem 0 3.5rem; }
+            .hero-container { height: clamp(240px, 75vw, 360px); }
+            .academic-title { font-size: clamp(2rem, 9vw, 2.5rem); margin-bottom: 0.75rem; }
+            .academic-subtitle { margin-bottom: 1rem; }
+            .email-container { align-items: flex-start; margin-bottom: 1.25rem; }
+            .section { padding: 3rem 0; }
+            .section-title { margin-bottom: 0.5rem; }
+            .grid { gap: 1.5rem; }
+            .quote-card { padding: 1.25rem; }
+            .game-icon { top: 0.75rem; right: 0.75rem; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { transition-duration: 0.01ms !important; }
+        }
         </style>
 
 
@@ -566,14 +592,12 @@
 <link rel="shortcut icon" href="favicon_io/favicon.ico">
 
 <link rel="preload" as="image" href="Foto/slide-1.webp">
-    
-<body>
 
 </head>
 <body>
 
     <a href="duck-rabbit-game/index.html" target="_blank" class="game-icon"> 
-        <img src="duckrabbit_icon.png"> 
+        <img src="duckrabbit_icon.png" alt="Play the duck-rabbit game"> 
     </a>
     
     <main>
@@ -585,8 +609,8 @@
                     <div class="col-span-5">
                         <div class="hero-container">
                             <div class="hero-image" id="heroImage"></div>
-                            <button class="prev">&#10094;</button>
-                            <button class="next">&#10095;</button>
+                            <button class="prev" type="button" aria-label="Previous photograph">&#10094;</button>
+                            <button class="next" type="button" aria-label="Next photograph">&#10095;</button>
                         </div>
                     </div>
 
@@ -605,10 +629,6 @@
 
                             <div class="button-container">
                                   <a href="cv.pdf" class="btn btn-primary" target="_blank">Curriculum Vitae</a>
-                                
-                                  <a href="duck-rabbit-game/index.html" target="_blank" class="game-icon">
-                                      <img src="duckrabbit_icon.png">
-                                  </a>
 
                             </div>
                         </div>
@@ -714,13 +734,11 @@
         <footer class="footer">
             <div class="container">
                 <p class="footer-text">
-                    © 2025 <span id="footerName">Francesco Zucchini</span>. Built with care for excellence.
+                    © 2026 <span id="footerName">Francesco Zucchini</span>. Built with care for excellence.
                 </p>
             </div>
         </footer>
     </main>
-    
-    </script>
 
     <script>
         const images = [  
@@ -755,10 +773,12 @@
             showImage(currentIndex);
         });
         
-        setInterval(() => {
-            currentIndex = (currentIndex + 1) % images.length;
-            showImage(currentIndex);
-        }, 5000);
+        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % images.length;
+                showImage(currentIndex);
+            }, 5000);
+        }
     </script>
     
 </body>
